@@ -1,11 +1,66 @@
-.App {
-  text-align: center;
+body {
+  margin: 0;
 }
 
-nav {
-  text-align: center;
+.App {
   display: grid;
-  margin: 20px 0 0;
-  padding: 10px 0;
-  position: fixed;
+  grid-template-rows: 3em 3em 1fr;
+  grid-auto-columns: auto;
+  /* padding: 15px; */
+  height: 92vh;
+}
+
+.header {
+  background-color: #7719aa;
+  font-weight: 900;
+  color: white;
+  grid-row: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.nav-bar {
+  background-color: #7719aa;
+  color: white;
+  padding: 10px;
+  grid-row: 2;
+  display: grid;
+  grid-template-rows: auto;
+  grid-template-columns: 25% 75%;
+}
+
+.nav-link {
+  color: white;
+  text-decoration: none;
+}
+
+.nav-links {
+  display: grid;
+  align-content: center;
+  grid-template-rows: auto;
+  grid-template-columns: auto auto auto auto;
+}
+
+.logged-user {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.dropdown {
+  display: flex;
+  align-items: center;
+}
+
+.dropdown .label {
+  margin-right: 5%;
+}
+
+.dropdown option {
+  padding: 10px;
+}
+
+.main-content {
+  padding: 10px;
 }
