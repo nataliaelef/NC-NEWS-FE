@@ -15,7 +15,7 @@ class Users extends Component {
     const { users } = this.state;
     return (
       <div className="users">
-        <ul>
+        <ol>
           {users.map(user => (
             <li className="userList" key={user.name}>
               <div>name: {user.name}</div>
@@ -23,7 +23,7 @@ class Users extends Component {
               <div>avatar_url: {user.avatar_url}</div>
             </li>
           ))}
-        </ul>
+        </ol>
       </div>
     );
   }
