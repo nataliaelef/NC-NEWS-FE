@@ -9,6 +9,10 @@ export const getUsers = async () =>
 export const getArticles = async () =>
   (await axios.get(`${BASE_URL}/articles`)).data.articles;
 
+// Topics
+export const getTopics = async () =>
+  (await axios.get(`${BASE_URL}/topics`)).data.topics;
+
 // Comments
 export const addCommentByArticleId = async commentRequest =>
   // {article_id, username, body}

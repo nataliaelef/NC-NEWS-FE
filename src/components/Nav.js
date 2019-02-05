@@ -10,12 +10,12 @@ class Nav extends Component {
 
   selectUser = selectedUser => {
     //TODO: Do something with this value
-    console.log(selectedUser);
+    // console.log(selectedUser);
   };
 
   componentWillMount = async () => {
     const users = await api.getUsers();
-    console.log(await api.getArticles());
+    //console.log(await api.getArticles());
     const usernames = users.map(user => ({
       label: user.username,
       value: user.username
