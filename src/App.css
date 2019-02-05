@@ -6,7 +6,6 @@ body {
   display: grid;
   grid-template-rows: 3em 3em 1fr;
   grid-auto-columns: auto;
-  /* padding: 15px; */
   height: 92vh;
 }
 
@@ -61,6 +60,51 @@ body {
   padding: 10px;
 }
 
-.main-content {
+.topic-main {
   padding: 10px;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 1em;
+}
+
+.topics {
+  grid-column: 1;
+  grid-row: auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.topic-to-post {
+  grid-column: 2;
+  grid-row: auto;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.article-main {
+  padding: 10px;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 75% 25%;
+  grid-template-rows: 3em;
+}
+
+.article-sort {
+  grid-row: 1;
+  display: flex;
+}
+
+.articles {
+  grid-column: 1;
+  grid-row: auto;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.article-to-post {
+  grid-column: 2;
+  grid-row: auto;
+  display: flex;
+  justify-content: flex-start;
 }

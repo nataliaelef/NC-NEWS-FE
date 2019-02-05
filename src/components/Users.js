@@ -18,9 +18,9 @@ class Users extends Component {
         <ol>
           {users.map(user => (
             <li className="userList" key={user.name}>
-              <div>name: {user.name}</div>
-              <div>username: {user.username}</div>
-              <div>avatar_url: {user.avatar_url}</div>
+              <div>Name: {user.name}</div>
+              <div>Username: {user.username}</div>
+              <div>Avatar_url: {user.avatar_url}</div>
             </li>
           ))}
         </ol>
