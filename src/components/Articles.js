@@ -1,13 +1,42 @@
 import React, { Component } from 'react';
 import { Router, Link } from '@reach/router';
+import { Card, Form, Input, TextArea, Button } from 'semantic-ui-react';
 import * as api from '../utils/api';
-import ArticleById from '../components/Article';
 
 class Articles extends Component {
   state = {
     articles: [],
     topics: ''
   };
+
+  renderArticles = () => {
+    const { articles } = this.state;
+    return articles.map(article => (
+      <Card
+        link
+        header={article.title}
+        meta={article.author}
+        description={article.body}
+      />
+    ));
+  };
+
+  renderForm = () => (
+    <Form>
+      <h3>Create article</h3>
+      <Form.Group widths="equal">
+        <Form.Field control={Input} label="Title" placeholder="Title" />
+      </Form.Group>
+      <Form.Field
+        control={TextArea}
+        label="Body"
+        placeholder="Start writing your article"
+      />
+      <Button primary type="Submit">
+        Submit
+      </Button>
+    </Form>
+  );
 
   selectTopic = selectedTopic => {
     //TODO: sort articles by selected topic
@@ -20,49 +49,11 @@ class Articles extends Component {
   };
 
   render() {
-    const { articles } = this.state;
-
     return (
       <div className="article-main">
-        <div className="articles">
-          {/* <ol>
-            {articles.map(article => (
-              <li className="articleList" key={article.article_id}>
-                <div>Author: {article.author}</div>
-                <div>Title: {article.title}</div>
-                <div>Created at: {article.created_at}</div>
-                <div>Topic: {article.topic}</div>
-                <div>Votes: {article.votes}</div>
-              </li>
-            ))}
-          </ol> */}
-          <ul>
-            {articles.map(article => (
-              <li className="articleList" key={article.article_id}>
-                <Link to={`${article.article_id}`}>{article.title}</Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <Router>
-          <ArticleById path="/:article_id" />
-        </Router>
-        <div className="article-to-post">
-          <form>
-            <div className="field">
-              <label>Slug</label>
-              <input type="text" name="slug" placeholder="add slug" />
-            </div>
-            <div className="field">
-              <label>Description</label>
-              <input
-                type="text"
-                name="description"
-                placeholder="add description"
-              />
-            </div>
-          </form>
-        </div>
+        <div className="articles">{this.renderArticles()}</div>
+        <div className="divider" />
+        <div className="create-article">{this.renderForm()}</div>
       </div>
     );
   }
