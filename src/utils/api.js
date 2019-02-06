@@ -36,8 +36,20 @@ export const getCommentsByArticleId = async articleId =>
   (await axios.get(`${BASE_URL}/articles/${articleId}/comments`)).data.comments;
 
 export const addCommentByArticleId = async commentRequest =>
-  // {article_id, username, body}
   await axios.post(`${BASE_URL}/articles/${commentRequest.articleId}`, {
     body: commentRequest.body,
     username: commentRequest.username
   });
+
+//votes
+export const voteOnArticle = (voteChange, articleId) => {
+  // console.log(articleId);
+  return axios({
+    method: 'patch',
+    url: `${BASE_URL}/articles/${articleId}`,
+
+    data: {
+      inc_votes: voteChange
+    }
+  }).then(({ data: { article } }) => article);
+};

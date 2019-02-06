@@ -15,7 +15,7 @@ class Comments extends Component {
 
   renderComments = () => {
     return this.state.comments.map(comment => (
-      <Comment>
+      <Comment key={comment.comment_id}>
         <Comment.Avatar src="/images/avatar/small/joe.jpg" />
         <Comment.Content>
           <Comment.Author as="a">{comment.author}</Comment.Author>

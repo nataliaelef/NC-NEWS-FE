@@ -1,9 +1,27 @@
 import React, { Component } from 'react';
+import { Router, Link } from '@reach/router';
+import { Card, Image } from 'semantic-ui-react';
 import * as api from '../utils/api';
 
 class Users extends Component {
   state = {
     users: []
+  };
+
+  renderUsers = () => {
+    const { users } = this.state;
+    return users.map(user => (
+      <Link to={`/users/${user.username}`} key={user.username}>
+        <Card>
+          <Image src="https://react.semantic-ui.com/images/avatar/large/matthew.png" />
+          <Card.Content>
+            <Card.Header>{user.username}</Card.Header>
+            <Card.Meta>{user.name}</Card.Meta>
+            <Card.Description>{user.avatar_url}</Card.Description>
+          </Card.Content>
+        </Card>
+      </Link>
+    ));
   };
 
   componentDidMount = async () => {
@@ -12,18 +30,9 @@ class Users extends Component {
   };
 
   render() {
-    const { users } = this.state;
     return (
       <div className="users">
-        <ol>
-          {users.map(user => (
-            <li className="userList" key={user.name}>
-              <div>Name: {user.name}</div>
-              <div>Username: {user.username}</div>
-              <div>Avatar_url: {user.avatar_url}</div>
-            </li>
-          ))}
-        </ol>
+        <div className="users">{this.renderUsers()}</div>
       </div>
     );
   }

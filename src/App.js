@@ -18,6 +18,7 @@ class App extends Component {
         <Router className="main-content">
           <Home path="/" />
           <Users path="/users" />
+          <Users path="/users/:username" />
           <Topics path="/topics" />
           <Articles path="/articles" />
           {/* <Articles path="/articles/:topic" /> */}

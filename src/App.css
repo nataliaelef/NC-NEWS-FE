@@ -128,3 +128,18 @@ body {
   text-overflow: ellipsis;
   max-height: 13ch;
 }
+
+.users {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-auto-rows: 15em;
+  grid-gap: 0 10px;
+}
+
+.users a {
+  display: flex;
+}
+
+.users a .ui.card:first-child {
+  margin: 1em 0;
+}

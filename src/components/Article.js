@@ -5,7 +5,15 @@ import Comments from './Comments';
 
 class Article extends Component {
   state = {
-    article: {}
+    article: {},
+    voteChange: 0
+  };
+
+  handleVoteClick = voteChange => {
+    api.voteOnArticle(voteChange, this.props.id).then(article => {
+      console.log(article);
+      this.setState({ voteChange });
+    });
   };
 
   componentDidMount = async () => {
@@ -15,13 +23,30 @@ class Article extends Component {
   };
 
   render() {
-    const { article } = this.state;
+    const { article, voteChange } = this.state;
     return (
       <div className="ui container">
         <div className="article ">
           <h1 className="ui header">{article.title}</h1>
           <h4 className="ui header">{article.author}</h4>
           <p className="body">{article.body}</p>
+          <div className="votes">{article.votes + voteChange} </div>
+          <Button
+            basic
+            color="green"
+            disabled={this.state.voteChange === 1}
+            onClick={() => this.handleVoteClick(1)}
+          >
+            Upvote
+          </Button>
+          <Button
+            basic
+            color="red"
+            disabled={voteChange === -1}
+            onClick={() => this.handleVoteClick(-1)}
+          >
+            Downvote
+          </Button>
         </div>
         <Comments articleId={this.props.id} />
       </div>
