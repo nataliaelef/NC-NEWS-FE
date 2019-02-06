@@ -97,11 +97,15 @@ body {
   grid-gap: 0 10px;
 }
 
-.articles .ui.card:first-child {
+.articles a {
+  display: flex;
+}
+
+.articles a .ui.card:first-child {
   margin: 1em 0;
 }
 
-.articles .ui.card .description {
+.articles a .ui.card .description {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 13ch;
@@ -111,4 +115,8 @@ body {
   border-left: 1px solid grey;
   padding: 10px 0;
   display: flex;
+}
+
+.article {
+  margin-top: 3em;
 }

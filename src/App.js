@@ -7,6 +7,7 @@ import Home from './components/Home';
 import Users from './components/Users';
 import Topics from './components/Topics';
 import Articles from './components/Articles';
+import Article from './components/Article';
 
 class App extends Component {
   render() {
@@ -19,6 +20,7 @@ class App extends Component {
           <Users path="/users" />
           <Topics path="/topics" />
           <Articles path="/articles" />
+          <Article path="/articles/:id" />
         </Router>
       </div>
     );

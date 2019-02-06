@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Router, Link } from '@reach/router';
 import { Card, Form, Input, TextArea, Button } from 'semantic-ui-react';
+import Article from '../components/Article';
 import * as api from '../utils/api';
 
 class Articles extends Component {
@@ -9,15 +10,19 @@ class Articles extends Component {
     topics: ''
   };
 
+  onArticleClick = id => {};
+
   renderArticles = () => {
     const { articles } = this.state;
     return articles.map(article => (
-      <Card
-        link
-        header={article.title}
-        meta={article.author}
-        description={article.body}
-      />
+      <Link to={`/articles/${article.article_id}`}>
+        <Card
+          link
+          header={article.title}
+          meta={article.author}
+          description={article.body}
+        />
+      </Link>
     ));
   };
 

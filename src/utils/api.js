@@ -13,8 +13,8 @@ export const getUsersByUsername = username => {
 export const getArticles = async () =>
   (await axios.get(`${BASE_URL}/articles`)).data.articles;
 
-export const getArticleById = async () =>
-  await axios.get(`${BASE_URL}/acticles/:article_id`).data.articles;
+export const getArticleById = async article_id =>
+  (await axios.get(`${BASE_URL}/articles/${article_id}`)).data.article;
 
 // Topics
 export const getTopics = async () =>
@@ -32,9 +32,8 @@ export const getArticlesByTopic = async topicRequest => {
 };
 
 // Comments
-export const getCommentByArticleId = async commentRequest =>
-  await axios.get(`${BASE_URL}/articles/${commentRequest.article_id}/comments`)
-    .data.comments;
+export const getCommentsByArticleId = async articleId =>
+  (await axios.get(`${BASE_URL}/articles/${articleId}/comments`)).data.comments;
 
 export const addCommentByArticleId = async commentRequest =>
   // {article_id, username, body}
