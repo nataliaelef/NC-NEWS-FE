@@ -71,7 +71,7 @@ body {
 .articles {
   display: grid;
   grid-template-columns: auto auto auto;
-  grid-auto-rows: 15em;
+  grid-auto-rows: 18em;
   grid-gap: 0 10px;
 }
 
@@ -132,12 +132,18 @@ body {
 .users {
   display: grid;
   grid-template-columns: auto auto auto;
-  grid-auto-rows: 15em;
+  grid-auto-rows: auto;
   grid-gap: 0 10px;
 }
 
 .users a {
   display: flex;
+}
+
+.ui image {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 40ch;
 }
 
 .users a .ui.card:first-child {

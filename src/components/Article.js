@@ -32,7 +32,7 @@ class Article extends Component {
           <h1 className="ui header">{article.title}</h1>
           <h4 className="ui header">{article.author}</h4>
           <p className="body">{article.body}</p>
-          <div className="votes">{article.votes + votes} </div>
+          <div className="votes">Votes: {article.votes + votes} </div>
           <Button
             basic
             color="green"
