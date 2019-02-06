@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
-import { Card, Button, Image } from 'semantic-ui-react';
+import { Button } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import Comments from './Comments';
 
 class Article extends Component {
   state = {
     article: {},
-    voteChange: 0
+    votes: 0
   };
 
-  handleVoteClick = voteChange => {
-    api.voteOnArticle(voteChange, this.props.id).then(article => {
-      console.log(article);
-      this.setState({ voteChange });
+  handleVoteClick = addedVote => {
+    api.voteOnArticle(addedVote, this.props.id).then(() => {
+      // console.log(article);
+      this.setState({
+        votes: this.state.votes + addedVote
+      });
     });
   };
 
@@ -23,18 +25,18 @@ class Article extends Component {
   };
 
   render() {
-    const { article, voteChange } = this.state;
+    const { article, votes } = this.state;
     return (
       <div className="ui container">
         <div className="article ">
           <h1 className="ui header">{article.title}</h1>
           <h4 className="ui header">{article.author}</h4>
           <p className="body">{article.body}</p>
-          <div className="votes">{article.votes + voteChange} </div>
+          <div className="votes">{article.votes + votes} </div>
           <Button
             basic
             color="green"
-            disabled={this.state.voteChange === 1}
+            disabled={votes === 1}
             onClick={() => this.handleVoteClick(1)}
           >
             Upvote
@@ -42,7 +44,7 @@ class Article extends Component {
           <Button
             basic
             color="red"
-            disabled={voteChange === -1}
+            disabled={votes === -1}
             onClick={() => this.handleVoteClick(-1)}
           >
             Downvote

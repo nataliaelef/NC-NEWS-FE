@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Link } from '@reach/router';
+import { Link } from '@reach/router';
 import { Card, Image } from 'semantic-ui-react';
 import * as api from '../utils/api';
 

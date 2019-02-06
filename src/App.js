@@ -21,7 +21,7 @@ class App extends Component {
           <Users path="/users/:username" />
           <Topics path="/topics" />
           <Articles path="/articles" />
-          {/* <Articles path="/articles/:topic" /> */}
+          <Articles path="/articles/:id/comments/:comment_id" />
           <Article path="/articles/:id" />
         </Router>
       </div>

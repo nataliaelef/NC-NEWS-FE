@@ -1,5 +1,6 @@
 import axios from 'axios';
-const BASE_URL = 'http://localhost:9090/api';
+const BASE_URL = `https://nc-news-api-ne.herokuapp.com/api`;
+// 'http://localhost:9090/api';
 
 // Users
 export const getUsers = async () =>
@@ -42,14 +43,25 @@ export const addCommentByArticleId = async commentRequest =>
   });
 
 //votes
-export const voteOnArticle = (voteChange, articleId) => {
+export const voteOnArticle = (addedVote, articleId) => {
   // console.log(articleId);
   return axios({
     method: 'patch',
     url: `${BASE_URL}/articles/${articleId}`,
 
     data: {
-      inc_votes: voteChange
+      inc_votes: { addedVote }
     }
   }).then(({ data: { article } }) => article);
+};
+
+//votes
+export const voteOnComment = (addedVote, articleId, commentId) => {
+  return axios({
+    method: 'patch',
+    url: `${BASE_URL}/articles/${articleId}/comments/${commentId}`,
+    data: {
+      inc_votes: addedVote
+    }
+  }).then(({ data: { comments } }) => comments);
 };

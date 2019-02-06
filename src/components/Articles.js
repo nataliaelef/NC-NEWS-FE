@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Router, Link } from '@reach/router';
+import { Link } from '@reach/router';
 import { Card, Form, Input, TextArea, Button } from 'semantic-ui-react';
-import Article from '../components/Article';
+// import Article from '../components/Article';
 import * as api from '../utils/api';
 
 class Articles extends Component {
@@ -48,10 +48,7 @@ class Articles extends Component {
   };
 
   componentDidMount = async () => {
-    //if this props includes topic then get by topic instead
-
     const articles = await api.getArticles();
-    // const topics = top.map(user => ())
     this.setState({ articles });
   };
 

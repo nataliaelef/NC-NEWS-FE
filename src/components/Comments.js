@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
-import { Comment, Header } from 'semantic-ui-react';
+import { Comment, Header, Button } from 'semantic-ui-react';
 import * as api from '../utils/api';
 
 class Comments extends Component {
   state = {
-    comments: []
+    comments: [],
+    votes: 0
+  };
+
+  handleCommentVoteClick = addedVote => {
+    api
+      .voteOnComment(addedVote, this.props.id, this.props.comment_id)
+      // console.log(comment)
+      .then(comments => {
+        this.setState({ votes: this.state.votes + addedVote });
+      });
   };
 
   componentDidMount = async () => {
@@ -23,9 +33,18 @@ class Comments extends Component {
             <div>{comment.created_at}</div>
           </Comment.Metadata>
           <Comment.Text>{comment.body}</Comment.Text>
+          <Comment.Text>{comment.votes}</Comment.Text>
           <Comment.Actions>
-            <Comment.Action>Upvote</Comment.Action>
-            <Comment.Action>Downvote</Comment.Action>
+            <Button
+              size="mini"
+              icon="arrow up"
+              onClick={() => this.handleCommentVoteClick(1)}
+            />
+            <Button
+              size="mini"
+              icon="arrow down"
+              onClick={() => this.handleCommentVoteClick(-1)}
+            />
           </Comment.Actions>
         </Comment.Content>
       </Comment>
