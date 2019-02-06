@@ -1,55 +1,45 @@
 import React, { Component } from 'react';
+import { Link } from '@reach/router';
+import { Card, Form, Input, Button } from 'semantic-ui-react';
 import * as api from '../utils/api';
 
 class Topics extends Component {
   state = {
-    topics: [],
-    slug: null,
-    description: null
+    topics: []
   };
+
+  renderTopics = () => {
+    const { topics } = this.state;
+    return topics.map(topic => (
+      <Link to={`/topics/${topic.slug}`} key={topic.slug}>
+        <Card link header={topic.slug} description={topic.description} />
+      </Link>
+    ));
+  };
+
+  renderForm = () => (
+    <Form>
+      <h3>Create topic</h3>
+      <Form.Group widths="equal">
+        <Form.Field control={Input} label="Title" placeholder="Title" />
+      </Form.Group>
+      <Button primary type="Submit">
+        Submit
+      </Button>
+    </Form>
+  );
 
   componentDidMount = async () => {
     const topics = await api.getTopics();
     this.setState({ topics });
   };
 
-  // componentDidUpdate = async (prevProps, prevState) => {
-  //   if (prevState.slug !== null && prevProps.description !== null) {
-  //     const topic = await api.addTopic(this.state.slug, this.state.description);
-  //     this.setState({ topic });
-  //   }
-  // };
-
   render() {
-    const { topics } = this.state;
     return (
       <div className="topic-main">
-        <div className="topics">
-          <ol>
-            {topics.map(topic => (
-              <li className="topic-list" key={topic.slug}>
-                <div>Slug: {topic.slug}</div>
-                <div>Description: {topic.description}</div>
-              </li>
-            ))}
-          </ol>
-        </div>
-        <div className="topic-to-post">
-          <form>
-            <div className="field">
-              <label>Slug</label>
-              <input type="text" name="slug" placeholder="add slug" />
-            </div>
-            <div className="field">
-              <label>Description</label>
-              <input
-                type="text"
-                name="description"
-                placeholder="add description"
-              />
-            </div>
-          </form>
-        </div>
+        <div className="topics">{this.renderTopics()}</div>
+        <div className="divider" />
+        <div className="create-topic">{this.renderForm()}</div>
       </div>
     );
   }

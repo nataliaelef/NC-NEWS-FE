@@ -20,6 +20,7 @@ class App extends Component {
           <Users path="/users" />
           <Topics path="/topics" />
           <Articles path="/articles" />
+          {/* <Articles path="/articles/:topic" /> */}
           <Article path="/articles/:id" />
         </Router>
       </div>

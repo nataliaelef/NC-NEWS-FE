@@ -60,28 +60,6 @@ body {
   padding: 10px;
 }
 
-.topic-main {
-  padding: 10px;
-  grid-row: 3;
-  display: grid;
-  grid-template-columns: 75% 25%;
-  grid-template-rows: 1em;
-}
-
-.topics {
-  grid-column: 1;
-  grid-row: auto;
-  display: flex;
-  justify-content: flex-start;
-}
-
-.topic-to-post {
-  grid-column: 2;
-  grid-row: auto;
-  display: flex;
-  justify-content: flex-end;
-}
-
 .article-main {
   padding: 10px;
   grid-row: 3;
@@ -115,8 +93,38 @@ body {
   border-left: 1px solid grey;
   padding: 10px 0;
   display: flex;
+  height: auto;
 }
 
 .article {
   margin-top: 3em;
+}
+
+.topic-main {
+  padding: 10px;
+  grid-row: 3;
+  display: grid;
+  grid-template-columns: 74% 2% 24%;
+  grid-template-rows: auto;
+}
+
+.topics {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-auto-rows: 15em;
+  grid-gap: 0 10px;
+}
+
+.topics a {
+  display: flex;
+}
+
+.topics a .ui.card:first-child {
+  margin: 1em 0;
+}
+
+.topics a .ui.card .description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 13ch;
 }

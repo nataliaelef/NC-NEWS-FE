@@ -13,7 +13,7 @@ class Nav extends Component {
     // console.log(selectedUser);
   };
 
-  componentWillMount = async () => {
+  componentDidMount = async () => {
     const users = await api.getUsers();
     //console.log(await api.getArticles());
     const usernames = users.map(user => ({

@@ -15,7 +15,7 @@ class Articles extends Component {
   renderArticles = () => {
     const { articles } = this.state;
     return articles.map(article => (
-      <Link to={`/articles/${article.article_id}`}>
+      <Link to={`/articles/${article.article_id}`} key={article.article_id}>
         <Card
           link
           header={article.title}
@@ -48,6 +48,8 @@ class Articles extends Component {
   };
 
   componentDidMount = async () => {
+    //if this props includes topic then get by topic instead
+
     const articles = await api.getArticles();
     // const topics = top.map(user => ())
     this.setState({ articles });
