@@ -2,11 +2,21 @@ import React, { Component } from 'react';
 import { Button } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import Comments from './Comments';
+import AddComment from './AddComment';
 
 class Article extends Component {
   state = {
     article: {},
+    comments: [],
     votes: 0
+  };
+
+  postedComment = (body, username, articleId) => {
+    api.addCommentByArticleId(body, username, articleId).then(comment => {
+      this.setState(prevState => ({
+        comments: [comment, ...prevState.comments]
+      }));
+    });
   };
 
   handleVoteClick = addedVote => {
@@ -20,11 +30,13 @@ class Article extends Component {
   componentDidMount = async () => {
     const { id } = this.props;
     const article = await api.getArticleById(id);
-    this.setState({ article });
+    const comments = await api.getCommentsByArticleId(id);
+    this.setState({ article, comments });
   };
 
   render() {
-    const { article, votes } = this.state;
+    const { article, votes, comments } = this.state;
+    const { id: articleId, user } = this.props;
     return (
       <div className="ui container">
         <div className="article ">
@@ -49,7 +61,12 @@ class Article extends Component {
             Downvote
           </Button>
         </div>
-        <Comments articleId={this.props.id} />
+        <AddComment
+          articleId={articleId}
+          postedComment={this.postedComment}
+          user={user}
+        />
+        <Comments comments={comments} />
       </div>
     );
   }

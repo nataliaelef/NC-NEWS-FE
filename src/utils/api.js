@@ -42,11 +42,16 @@ export const getArticlesByTopic = async topic =>
 export const getCommentsByArticleId = async articleId =>
   (await axios.get(`${BASE_URL}/articles/${articleId}/comments`)).data.comments;
 
-export const addCommentByArticleId = async commentRequest =>
-  await axios.post(`${BASE_URL}/articles/${commentRequest.articleId}`, {
-    body: commentRequest.body,
-    username: commentRequest.username
-  });
+export const addCommentByArticleId = async (body, username, articleId) => {
+  const comment = (await axios.post(
+    `${BASE_URL}/articles/${articleId}/comments`,
+    {
+      body,
+      username
+    }
+  )).data.comment;
+  return { ...comment, author: comment.username };
+};
 
 //votes
 export const voteOnArticle = (addedVote, articleId) => {

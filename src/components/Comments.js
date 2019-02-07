@@ -1,21 +1,10 @@
 import React, { Component } from 'react';
 import { Comment, Header } from 'semantic-ui-react';
-import * as api from '../utils/api';
-import CommentItem from './CommenItem';
+import CommentItem from './CommentItem';
 
 class Comments extends Component {
-  state = {
-    comments: []
-  };
-
-  componentDidMount = async () => {
-    const { articleId } = this.props;
-    const comments = await api.getCommentsByArticleId(articleId);
-    this.setState({ comments });
-  };
-
   renderComments = () => {
-    return this.state.comments.map(comment => (
+    return this.props.comments.map(comment => (
       <CommentItem comment={comment} key={comment.comment_id} />
     ));
   };

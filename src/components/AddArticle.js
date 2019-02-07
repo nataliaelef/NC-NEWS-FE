@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import * as api from '../utils/api';
 import { Form, TextArea, Button } from 'semantic-ui-react';
 
 class AddArticle extends Component {
@@ -10,21 +9,16 @@ class AddArticle extends Component {
 
   handleOnChange = (e, { name, value }) => {
     e.preventDefault();
+
+    //[name] to evaluate the and not give a key
     this.setState({ [name]: value });
   };
 
   handleOnSubmit = () => {
     const { title, body } = this.state;
     const { slug, user, postedArticle } = this.props;
-    // console.log(slug);
-    // console.log(user);
-    this.setState({ title, body });
     postedArticle(title, body, slug, user);
     this.setState({ title: '', body: '' });
-  };
-
-  componentDidMount = async () => {
-    api.addArticleByTopic();
   };
 
   render() {
