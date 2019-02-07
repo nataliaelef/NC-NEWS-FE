@@ -17,17 +17,17 @@ class Topics extends Component {
     ));
   };
 
-  // renderForm = () => (
-  //   <Form>
-  //     <h3>Create topic</h3>
-  //     <Form.Group widths="equal">
-  //       <Form.Field control={Input} label="Title" placeholder="Title" />
-  //     </Form.Group>
-  //     <Button primary type="Submit">
-  //       Submit
-  //     </Button>
-  //   </Form>
-  // );
+  renderForm = () => (
+    <Form>
+      <h3>Create topic</h3>
+      <Form.Group widths="equal">
+        <Form.Field control={Input} label="Title" placeholder="Title" />
+      </Form.Group>
+      <Button primary type="Submit">
+        Submit
+      </Button>
+    </Form>
+  );
 
   componentDidMount = async () => {
     const topics = await api.getTopics();
@@ -38,8 +38,8 @@ class Topics extends Component {
     return (
       <div className="topic-main">
         <div className="topics">{this.renderTopics()}</div>
-        {/* <div className="divider" />
-        <div className="create-topic">{this.renderForm()}</div> */}
+        <div className="divider" />
+        <div className="create-topic">{this.renderForm()}</div>
       </div>
     );
   }

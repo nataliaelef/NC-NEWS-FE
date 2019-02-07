@@ -21,20 +21,30 @@ class App extends Component {
     }
   };
 
+  onSelectTopic = selectedTopic => {
+    this.setState({ topic: selectedTopic });
+    if (!selectedTopic) {
+    }
+  };
+
   renderMenu = () => {
     if (this.state.user) {
       return (
         <Router className="main-content">
           <Home path="/" user={this.state.user} />
           <Users path="/users" user={this.state.user} />
-          <Topics path="/topics" user={this.state.user} />
-          <Articles
-            path="/articles"
+          <Topics
+            path="/topics"
             user={this.state.user}
             topic={this.state.topic}
           />
+          <Articles path="/articles" user={this.state.user} />
           <Article path="/articles/:id" user={this.state.user} />
-          <Articles path="/topics/:topic/articles" user={this.state.user} />
+          <Articles
+            path="/topics/:topic/articles"
+            topic={this.state.topic}
+            user={this.state.user}
+          />
         </Router>
       );
     } else {
@@ -50,7 +60,11 @@ class App extends Component {
     return (
       <div className="App">
         <Header user={this.state.user} />
-        <Nav selectUser={this.onSelectUser} user={this.state.user} />
+        <Nav
+          selectUser={this.onSelectUser}
+          user={this.state.user}
+          selectTopic={this.onSelectTopic}
+        />
         {this.renderMenu()}
       </div>
     );

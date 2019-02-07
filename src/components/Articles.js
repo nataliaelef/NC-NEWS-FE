@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card, Form, Input, TextArea, Button, Image } from 'semantic-ui-react';
+import { Card, Image } from 'semantic-ui-react';
 // import Article from '../components/Article';
 import * as api from '../utils/api';
+import AddArticle from '../components/AddArticle';
 
 class Articles extends Component {
   state = {
@@ -33,22 +34,16 @@ class Articles extends Component {
     ));
   };
 
-  renderForm = () => (
-    <Form>
-      <h3>Create article</h3>
-      <Form.Group widths="equal">
-        <Form.Field control={Input} label="Title" placeholder="Title" />
-      </Form.Group>
-      <Form.Field
-        control={TextArea}
-        label="Body"
-        placeholder="Start writing your article"
-      />
-      <Button primary type="Submit">
-        Submit
-      </Button>
-    </Form>
-  );
+  postedArticle = (title, body, slug, user) => {
+    api.addArticleByTopic(title, body, slug, user).then(article => {
+      this.setState(prevState => ({
+        articles: [
+          ...prevState.articles,
+          { author: article.data.article.username, ...article.data.article }
+        ]
+      }));
+    });
+  };
 
   updateArticles = async () => {
     let articles = [];
@@ -76,7 +71,12 @@ class Articles extends Component {
         <div className="article-main">
           <div className="articles">{this.renderArticles()}</div>
           <div className="divider" />
-          <div className="create-article">{this.renderForm()}</div>
+
+          <AddArticle
+            slug={this.props.topic}
+            user={this.props.user}
+            postedArticle={this.postedArticle}
+          />
         </div>
       );
     } else {
