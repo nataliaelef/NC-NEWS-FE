@@ -10,20 +10,43 @@ import Articles from './components/Articles';
 import Article from './components/Article';
 
 class App extends Component {
+  state = {
+    user: ''
+  };
+
+  onSelectUser = selectedUser => {
+    this.setState({ user: selectedUser });
+    if (!selectedUser) {
+    }
+  };
+
+  renderMenu = () => {
+    if (this.state.user) {
+      return (
+        <Router className="main-content">
+          <Home path="/" user={this.state.user} />
+          <Users path="/users" user={this.state.user} />
+          <Topics path="/topics" user={this.state.user} />
+          <Articles path="/articles" user={this.state.user} />
+          <Article path="/articles/:id" user={this.state.user} />
+          <Articles path="/topics/:topic/articles" user={this.state.user} />
+        </Router>
+      );
+    } else {
+      return (
+        <Router className="main-content">
+          <Home path="/" user={this.state.user} />
+        </Router>
+      );
+    }
+  };
+
   render() {
     return (
       <div className="App">
-        <Header />
-        <Nav />
-        <Router className="main-content">
-          <Home path="/" />
-          <Users path="/users" />
-          <Users path="/users/:username" />
-          <Topics path="/topics" />
-          <Articles path="/articles" />
-          <Articles path="/articles/:id/comments/:comment_id" />
-          <Article path="/articles/:id" />
-        </Router>
+        <Header user={this.state.user} />
+        <Nav selectUser={this.onSelectUser} user={this.state.user} />
+        {this.renderMenu()}
       </div>
     );
   }

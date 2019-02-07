@@ -28,9 +28,8 @@ export const addTopic = async topicRequest => {
   });
 };
 
-export const getArticlesByTopic = async topicRequest => {
-  await axios.get(`${BASE_URL}/topics/${topicRequest.topic}/articles`);
-};
+export const getArticlesByTopic = async topic =>
+  (await axios.get(`${BASE_URL}/topics/${topic}/articles`)).data.articles;
 
 // Comments
 export const getCommentsByArticleId = async articleId =>

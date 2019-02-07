@@ -16,6 +16,7 @@ class Home extends Component {
   //   this.setState({ articles });
   // };
   render() {
+    console.log(this.props.user);
     return <div>home</div>;
     // return <div className="articles" >{this.renderArticles()}</div>;
   }

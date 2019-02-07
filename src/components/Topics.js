@@ -11,7 +11,7 @@ class Topics extends Component {
   renderTopics = () => {
     const { topics } = this.state;
     return topics.map(topic => (
-      <Link to={`/topics/${topic.slug}`} key={topic.slug}>
+      <Link to={`/topics/${topic.slug}/articles`} key={topic.slug}>
         <Card link header={topic.slug} description={topic.description} />
       </Link>
     ));

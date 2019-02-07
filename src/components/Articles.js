@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card, Form, Input, TextArea, Button } from 'semantic-ui-react';
+import { Card, Form, Input, TextArea, Button, Image } from 'semantic-ui-react';
 // import Article from '../components/Article';
 import * as api from '../utils/api';
 
@@ -10,18 +10,25 @@ class Articles extends Component {
     topics: ''
   };
 
-  onArticleClick = id => {};
-
   renderArticles = () => {
     const { articles } = this.state;
     return articles.map(article => (
       <Link to={`/articles/${article.article_id}`} key={article.article_id}>
-        <Card
-          link
-          header={article.title}
-          meta={article.author}
-          description={article.body}
-        />
+        <Card>
+          <Card.Content>
+            <Image
+              floated="right"
+              size="mini"
+              src={`https://api.adorable.io/avatars/${Math.round(
+                Math.random() * 1000
+              )}`}
+            />
+            <Card.Header>{article.title}</Card.Header>
+            <Card.Meta>{article.topic}</Card.Meta>
+            <Card.Meta>{article.author}</Card.Meta>
+            <Card.Description>{article.body}</Card.Description>
+          </Card.Content>
+        </Card>
       </Link>
     ));
   };
@@ -43,12 +50,23 @@ class Articles extends Component {
     </Form>
   );
 
-  selectTopic = selectedTopic => {
-    //TODO: sort articles by selected topic
+  componentDidMount = async () => {
+    await this.updateArticles();
   };
 
-  componentDidMount = async () => {
-    const articles = await api.getArticles();
+  componentDidUpdate = async prevProps => {
+    if (prevProps.path !== this.props.path) {
+      await this.updateArticles();
+    }
+  };
+
+  updateArticles = async () => {
+    let articles = [];
+    if (this.props.topic) {
+      articles = await api.getArticlesByTopic(this.props.topic);
+    } else {
+      articles = await api.getArticles();
+    }
     this.setState({ articles });
   };
 

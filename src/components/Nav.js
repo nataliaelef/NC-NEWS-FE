@@ -8,9 +8,37 @@ class Nav extends Component {
     usernames: []
   };
 
+  renderMenu = () => {
+    if (this.props.user) {
+      return (
+        <div className="nav-links">
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
+          <Link className="nav-link" to="/articles">
+            Articles
+          </Link>
+          <Link className="nav-link" to="/users">
+            Users
+          </Link>
+          <Link className="nav-link" to="/topics">
+            Topics
+          </Link>
+        </div>
+      );
+    } else {
+      return (
+        <div className="nav-links">
+          <Link className="nav-link" to="/">
+            Home
+          </Link>
+        </div>
+      );
+    }
+  };
+
   selectUser = selectedUser => {
-    //TODO: Do something with this value
-    // console.log(selectedUser);
+    this.props.selectUser(selectedUser);
   };
 
   componentDidMount = async () => {
@@ -27,20 +55,7 @@ class Nav extends Component {
   render() {
     return (
       <nav className="nav-bar">
-        <div className="nav-links">
-          <Link className="nav-link" to="/">
-            Home
-          </Link>
-          <Link className="nav-link" to="/articles">
-            Articles
-          </Link>
-          <Link className="nav-link" to="/users">
-            Users
-          </Link>
-          <Link className="nav-link" to="/topics">
-            Topics
-          </Link>
-        </div>
+        {this.renderMenu()}
         <div className="logged-user">
           <Dropdown
             label="Username"

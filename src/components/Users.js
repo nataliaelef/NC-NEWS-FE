@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import { Card, Image } from 'semantic-ui-react';
 import * as api from '../utils/api';
-import faker from 'faker';
 
 class Users extends Component {
   state = {
@@ -35,11 +34,7 @@ class Users extends Component {
   };
 
   render() {
-    return (
-      <div className="users">
-        <div className="users">{this.renderUsers()}</div>
-      </div>
-    );
+    return <div className="users">{this.renderUsers()}</div>;
   }
 }
 

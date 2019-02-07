@@ -86,7 +86,7 @@ body {
 .articles a .ui.card .description {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 13ch;
+  max-height: 10ch;
 }
 
 .divider {
@@ -131,9 +131,11 @@ body {
 
 .users {
   display: grid;
-  grid-template-columns: auto auto auto;
+  align-items: center;
+  grid-template-columns: repeat(4, auto);
   grid-auto-rows: auto;
-  grid-gap: 0 10px;
+  grid-gap: 10px 10px;
+  justify-content: center;
 }
 
 .users a {

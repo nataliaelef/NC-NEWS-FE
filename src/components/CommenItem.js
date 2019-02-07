@@ -5,7 +5,8 @@ import * as api from '../utils/api';
 class CommentItem extends Component {
   state = {
     comment: {},
-    votes: 0
+    votes: 0,
+    imageNum: Math.round(Math.random() * 1000)
   };
 
   handleCommentVoteClick = addedVote => {
@@ -27,9 +28,7 @@ class CommentItem extends Component {
     return (
       <Comment key={comment.comment_id}>
         <Comment.Avatar
-          src={`https://api.adorable.io/avatars/${Math.round(
-            Math.random() * 1000
-          )}`}
+          src={`https://api.adorable.io/avatars/${this.state.imageNum}`}
         />
         <Comment.Content>
           <Comment.Author as="a">{comment.author}</Comment.Author>
