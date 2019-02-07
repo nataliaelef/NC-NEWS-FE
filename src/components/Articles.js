@@ -39,7 +39,7 @@ class Articles extends Component {
       this.setState(prevState => ({
         articles: [
           ...prevState.articles,
-          { author: article.data.article.username, ...article.data.article }
+          { author: article.username, ...article }
         ]
       }));
     });

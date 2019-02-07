@@ -1,24 +1,22 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Comment, Header } from 'semantic-ui-react';
 import CommentItem from './CommentItem';
 
-class Comments extends Component {
-  renderComments = () => {
-    return this.props.comments.map(comment => (
-      <CommentItem comment={comment} key={comment.comment_id} />
-    ));
-  };
+const Comments = props => {
+  return (
+    <Comment.Group>
+      <Header as="h3" dividing>
+        Comments
+      </Header>
+      {renderComments(props.comments)}
+    </Comment.Group>
+  );
+};
 
-  render() {
-    return (
-      <Comment.Group>
-        <Header as="h3" dividing>
-          Comments
-        </Header>
-        {this.renderComments()}
-      </Comment.Group>
-    );
-  }
-}
+const renderComments = comments => {
+  return comments.map(comment => (
+    <CommentItem comment={comment} key={comment.comment_id} />
+  ));
+};
 
 export default Comments;
