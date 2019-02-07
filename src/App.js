@@ -11,7 +11,8 @@ import Article from './components/Article';
 
 class App extends Component {
   state = {
-    user: ''
+    user: '',
+    topic: ''
   };
 
   onSelectUser = selectedUser => {
@@ -27,7 +28,11 @@ class App extends Component {
           <Home path="/" user={this.state.user} />
           <Users path="/users" user={this.state.user} />
           <Topics path="/topics" user={this.state.user} />
-          <Articles path="/articles" user={this.state.user} />
+          <Articles
+            path="/articles"
+            user={this.state.user}
+            topic={this.state.topic}
+          />
           <Article path="/articles/:id" user={this.state.user} />
           <Articles path="/topics/:topic/articles" user={this.state.user} />
         </Router>

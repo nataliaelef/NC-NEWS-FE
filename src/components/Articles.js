@@ -50,16 +50,6 @@ class Articles extends Component {
     </Form>
   );
 
-  componentDidMount = async () => {
-    await this.updateArticles();
-  };
-
-  componentDidUpdate = async prevProps => {
-    if (prevProps.path !== this.props.path) {
-      await this.updateArticles();
-    }
-  };
-
   updateArticles = async () => {
     let articles = [];
     if (this.props.topic) {
@@ -70,14 +60,32 @@ class Articles extends Component {
     this.setState({ articles });
   };
 
+  componentDidMount = async () => {
+    await this.updateArticles();
+  };
+
+  componentDidUpdate = async prevProps => {
+    if (prevProps.path !== this.props.path) {
+      await this.updateArticles();
+    }
+  };
+
   render() {
-    return (
-      <div className="article-main">
-        <div className="articles">{this.renderArticles()}</div>
-        <div className="divider" />
-        <div className="create-article">{this.renderForm()}</div>
-      </div>
-    );
+    if (this.props.topic) {
+      return (
+        <div className="article-main">
+          <div className="articles">{this.renderArticles()}</div>
+          <div className="divider" />
+          <div className="create-article">{this.renderForm()}</div>
+        </div>
+      );
+    } else {
+      return (
+        <div className="article-main">
+          <div className="articles">{this.renderArticles()}</div>
+        </div>
+      );
+    }
   }
 }
 

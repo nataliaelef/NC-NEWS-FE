@@ -17,6 +17,13 @@ export const getArticles = async () =>
 export const getArticleById = async article_id =>
   (await axios.get(`${BASE_URL}/articles/${article_id}`)).data.article;
 
+export const addArticleByTopic = async (title, body, topic) => {
+  await axios.post(`${BASE_URL}/topics/${topic}/articles`, {
+    title,
+    body
+  });
+};
+
 // Topics
 export const getTopics = async () =>
   (await axios.get(`${BASE_URL}/topics`)).data.topics;
