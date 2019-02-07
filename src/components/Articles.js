@@ -4,6 +4,7 @@ import { Card, Image } from 'semantic-ui-react';
 // import Article from '../components/Article';
 import * as api from '../utils/api';
 import AddArticle from '../components/AddArticle';
+import { Dropdown } from '../components/common/Dropdown';
 
 class Articles extends Component {
   state = {
@@ -45,6 +46,12 @@ class Articles extends Component {
     });
   };
 
+  selectSortOption = () => {};
+  sortOptions = [
+    { label: 'created at', value: 'created_at' },
+    { label: 'topic', value: 'topic' }
+  ];
+
   updateArticles = async () => {
     let articles = [];
     if (this.props.topic) {
@@ -69,6 +76,11 @@ class Articles extends Component {
     if (this.props.topic) {
       return (
         <div className="article-main">
+          <Dropdown
+            label="Sort by"
+            options={this.sortOptions}
+            onValueChange={this.selectSortOption}
+          />
           <div className="articles">{this.renderArticles()}</div>
           <div className="divider" />
 
@@ -82,6 +94,11 @@ class Articles extends Component {
     } else {
       return (
         <div className="article-main">
+          <Dropdown
+            label="Sort by"
+            options={this.sortOptions}
+            onValueChange={this.selectSortOption}
+          />
           <div className="articles">{this.renderArticles()}</div>
         </div>
       );
