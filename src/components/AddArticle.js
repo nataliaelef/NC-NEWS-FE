@@ -35,7 +35,7 @@ class AddArticle extends Component {
             onChange={this.handleOnChange}
           />
           <Form.Input
-            placeholder="Title"
+            placeholder="Start typing your article"
             name="body"
             value={body}
             onChange={this.handleOnChange}

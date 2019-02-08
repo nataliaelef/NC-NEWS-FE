@@ -3,7 +3,11 @@ import Articles from './Articles';
 
 class Home extends Component {
   render() {
-    return <Articles />;
+    return (
+      <div>
+        <Articles />
+      </div>
+    );
   }
 }
 

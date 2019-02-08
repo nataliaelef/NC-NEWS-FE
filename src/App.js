@@ -33,11 +33,7 @@ class App extends Component {
         <Router className="main-content">
           <Home path="/" user={this.state.user} />
           <Users path="/users" user={this.state.user} />
-          <Topics
-            path="/topics"
-            user={this.state.user}
-            // topic={this.state.topic}
-          />
+          <Topics path="/topics" user={this.state.user} />
           <Articles path="/articles" user={this.state.user} />
           <Article path="/articles/:id" user={this.state.user} />
           <Articles
@@ -50,7 +46,8 @@ class App extends Component {
     } else {
       return (
         <Router className="main-content">
-          <Home path="/" user={this.state.user} />
+          <Home path="/" />
+          <Article path="/articles/:id" />
         </Router>
       );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Comment, Button } from 'semantic-ui-react';
 import * as api from '../utils/api';
+import Moment from 'react-moment';
 
 class CommentItem extends Component {
   state = {
@@ -33,7 +34,8 @@ class CommentItem extends Component {
         <Comment.Content>
           <Comment.Author as="a">{comment.author}</Comment.Author>
           <Comment.Metadata>
-            <div>{comment.created_at}</div>
+            {' '}
+            }<Moment format="YYYY/MM/DD">{comment.created_at}</Moment>
           </Comment.Metadata>
           <Comment.Text>{comment.body}</Comment.Text>
           <Comment.Text>Votes: {comment.votes + votes}</Comment.Text>
