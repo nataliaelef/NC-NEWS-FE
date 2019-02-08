@@ -36,7 +36,7 @@ class App extends Component {
           <Topics
             path="/topics"
             user={this.state.user}
-            topic={this.state.topic}
+            // topic={this.state.topic}
           />
           <Articles path="/articles" user={this.state.user} />
           <Article path="/articles/:id" user={this.state.user} />

@@ -46,10 +46,17 @@ class Articles extends Component {
     });
   };
 
-  selectSortOption = () => {};
+  selectSortOption = async selectedSortOption => {
+    if (!selectedSortOption) return;
+    const articles = await api.getArticles(selectedSortOption);
+    this.setState(articles);
+  };
+
   sortOptions = [
-    { label: 'created at', value: 'created_at' },
-    { label: 'topic', value: 'topic' }
+    { label: 'Please select', value: '' },
+    { label: 'Date created', value: 'created_at' },
+    { label: 'Author', value: 'author' },
+    { label: 'Votes', value: 'votes' }
   ];
 
   updateArticles = async () => {

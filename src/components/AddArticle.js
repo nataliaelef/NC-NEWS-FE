@@ -28,7 +28,6 @@ class AddArticle extends Component {
       <div className="create-article">
         <Form onSubmit={this.handleOnSubmit}>
           <h3>Create article</h3>
-          {/* <Form.Group> */}
           <Form.Input
             placeholder="Title"
             name="title"
@@ -42,14 +41,12 @@ class AddArticle extends Component {
             onChange={this.handleOnChange}
             control={TextArea}
           />
-          <Button primary type="Submit" onClick={this.handleSubmit}>
+          <Button primary type="Submit" onClick={this.handleOnSubmit}>
             Submit
           </Button>
-          {/* </Form.Group> */}
         </Form>
       </div>
     );
-    // )
   }
 }
 

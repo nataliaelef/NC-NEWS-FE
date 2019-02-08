@@ -1,18 +1,18 @@
 import axios from 'axios';
 const BASE_URL = `https://nc-news-api-ne.herokuapp.com/api`;
-// 'http://localhost:9090/api';
 
 // Users
 export const getUsers = async () =>
   (await axios.get(`${BASE_URL}/users`)).data.users;
 
-export const getUsersByUsername = username => {
-  axios.get(`${BASE_URL}/users/${username}`).then(({ data }) => data);
-};
-
 // Articles
-export const getArticles = async () =>
-  (await axios.get(`${BASE_URL}/articles`)).data.articles;
+export const getArticles = async sortedBy => {
+  let url = `${BASE_URL}/articles`;
+  if (sortedBy) {
+    url += `?sort_by=${sortedBy}&limit=100`;
+  }
+  return (await axios.get(url)).data.articles;
+};
 
 export const getArticleById = async article_id =>
   (await axios.get(`${BASE_URL}/articles/${article_id}`)).data.article;
@@ -28,12 +28,8 @@ export const addArticleByTopic = async (title, body, topic, username) =>
 export const getTopics = async () =>
   (await axios.get(`${BASE_URL}/topics`)).data.topics;
 
-export const addTopic = async topicRequest => {
-  await axios.post(`${BASE_URL}/topics`, {
-    slug: topicRequest.slug,
-    description: topicRequest.description
-  });
-};
+export const addTopic = async (slug, description) =>
+  (await axios.post(`${BASE_URL}/topics`, { slug, description })).data.topic;
 
 export const getArticlesByTopic = async topic =>
   (await axios.get(`${BASE_URL}/topics/${topic}/articles`)).data.articles;

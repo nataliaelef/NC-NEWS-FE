@@ -89,6 +89,7 @@ body {
   text-overflow: ellipsis;
   max-height: 10ch;
 }
+
 .article-main .divider {
   grid-row: 1 / span 2;
   border-left: 1px solid grey;

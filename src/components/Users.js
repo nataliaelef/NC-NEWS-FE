@@ -21,7 +21,6 @@ class Users extends Component {
           <Card.Content>
             <Card.Header>{user.username}</Card.Header>
             <Card.Meta>{user.name}</Card.Meta>
-            {/* <Card.Description>{user.avatar_url}</Card.Description> */}
           </Card.Content>
         </Card>
       </Link>
