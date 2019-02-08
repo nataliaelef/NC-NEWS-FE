@@ -9,7 +9,7 @@ export const getUsers = async () =>
 export const getArticles = async sortedBy => {
   let url = `${BASE_URL}/articles?limit=50`;
   if (sortedBy) {
-    url += `?sort_by=${sortedBy}`;
+    url += `&sort_by=${sortedBy}`;
   }
   return (await axios.get(url)).data.articles;
 };

@@ -60,7 +60,6 @@ class Articles extends Component {
   sortOptions = [
     { label: 'Please select', value: '' },
     { label: 'Date created', value: 'created_at' },
-    { label: 'Author', value: 'author' },
     { label: 'Votes', value: 'votes' }
   ];
 
