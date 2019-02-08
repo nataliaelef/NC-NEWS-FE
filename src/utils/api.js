@@ -24,6 +24,13 @@ export const addArticleByTopic = async (title, body, topic, username) =>
     username
   })).data.article;
 
+// export const deleteArticle = () =>{
+//   return axios({
+//     method: 'delete',
+//     url: `${BASE_URL}/articles/${articleId}`
+//   })
+// }
+
 // Topics
 export const getTopics = async () =>
   (await axios.get(`${BASE_URL}/topics`)).data.topics;
@@ -51,7 +58,6 @@ export const addCommentByArticleId = async (body, username, articleId) => {
 
 //votes
 export const voteOnArticle = (addedVote, articleId) => {
-  // console.log(articleId);
   return axios({
     method: 'patch',
     url: `${BASE_URL}/articles/${articleId}`,

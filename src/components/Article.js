@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Button, Image } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import Comments from './Comments';
 import AddComment from './AddComment';
@@ -41,7 +41,15 @@ class Article extends Component {
       <div className="ui container">
         <div className="article ">
           <h1 className="ui header">{article.title}</h1>
+          <Image
+            floated="right"
+            size="mini"
+            src={`https://api.adorable.io/avatars/${Math.round(
+              Math.random() * 1000
+            )}`}
+          />
           <h4 className="ui header">{article.author}</h4>
+
           <p className="body">{article.body}</p>
           <div className="votes">Votes: {article.votes + votes} </div>
           <Button
