@@ -4,7 +4,7 @@ body {
 
 .App {
   display: grid;
-  grid-template-rows: 3em 3em 1fr;
+  grid-template-rows: 8em 3em 1fr;
   grid-auto-columns: auto;
   height: 92vh;
 }
@@ -12,11 +12,28 @@ body {
 .main-header {
   background-color: #7719aa;
   font-weight: 900;
-  color: white;
+  grid-row: 1;
+  display: grid;
+  grid-template-rows: 50% 50%;
+  grid-template-columns: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-header .title {
   grid-row: 1;
   display: flex;
   align-items: center;
-  justify-content: center;
+  color: white !important;
+}
+
+.main-header .paragraph {
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  color: white !important;
+  background-color: #7719aa !important;
 }
 
 .nav-bar {
@@ -26,11 +43,17 @@ body {
   grid-row: 2;
   display: grid;
   grid-template-rows: auto;
-  grid-template-columns: 25% 75%;
+}
+
+.nav-bar .ui.menu {
+  align-items: center;
+}
+.nav-links .item {
+  color: white !important;
 }
 
 .nav-link {
-  color: white;
+  /* color: white; */
   text-decoration: none;
 }
 
@@ -45,6 +68,10 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+}
+
+.nav-bar .label {
+  color: white;
 }
 
 .dropdown {

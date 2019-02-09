@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import { Card } from 'semantic-ui-react';
 import * as api from '../utils/api';
-import AddTopic from './AddTopic';
+import TopicAdder from './TopicAdder';
 
 class Topics extends Component {
   state = {
@@ -36,7 +36,7 @@ class Topics extends Component {
       <div className="topic-main">
         <div className="topics">{this.renderTopics()}</div>
         <div className="divider" />
-        <AddTopic postedTopic={this.postedTopic} user={this.props.user} />
+        <TopicAdder postedTopic={this.postedTopic} user={this.props.user} />
       </div>
     );
   }

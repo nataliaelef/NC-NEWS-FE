@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, Button, TextArea } from 'semantic-ui-react';
 
-class AddTopic extends Component {
+class TopicAdder extends Component {
   state = {
     slug: '',
     description: ''
@@ -48,4 +48,4 @@ class AddTopic extends Component {
   }
 }
 
-export default AddTopic;
+export default TopicAdder;

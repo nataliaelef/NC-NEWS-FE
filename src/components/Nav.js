@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Dropdown } from './common/Dropdown';
+import { Menu, Container, Header, Dropdown } from 'semantic-ui-react';
 import * as api from '../utils/api';
 
 class Nav extends Component {
@@ -8,62 +8,62 @@ class Nav extends Component {
     usernames: []
   };
 
-  renderMenu = () => {
-    if (this.props.user) {
-      return (
-        <div className="nav-links">
-          <Link className="nav-link" to="/">
-            Home
-          </Link>
-          <Link className="nav-link" to="/articles">
-            Articles
-          </Link>
-          <Link className="nav-link" to="/users">
-            Users
-          </Link>
-          <Link className="nav-link" to="/topics">
-            Topics
-          </Link>
-        </div>
-      );
-    } else {
-      return (
-        <div className="nav-links">
-          <Link className="nav-link" to="/">
-            Home
-          </Link>
-        </div>
-      );
-    }
-  };
-
-  selectUser = selectedUser => {
-    this.props.selectUser(selectedUser);
-  };
-
   componentDidMount = async () => {
     const users = await api.getUsers();
-    //console.log(await api.getArticles());
     const usernames = users.map(user => ({
-      label: user.username,
-      value: user.username
+      text: user.username,
+      value: user.username,
+      image: `https://api.adorable.io/avatars/${Math.round(
+        Math.random() * 1000
+      )}`
     }));
-    usernames.unshift({ label: 'Select user', value: '' });
     this.setState({ usernames });
   };
 
   render() {
+    const { user } = this.props;
     return (
-      <nav className="nav-bar">
-        {this.renderMenu()}
-        <div className="logged-user">
-          <Dropdown
-            label="Username"
-            options={this.state.usernames}
-            onValueChange={this.selectUser}
-          />
-        </div>
-      </nav>
+      <Container fluid className="nav-bar">
+        <Header textAlign="center" as="h1" inverted>
+          NORTHCODERS NEWS
+        </Header>
+        <Menu>
+          <Link className="nav-link" to="/">
+            <Menu.Item name="home" />
+          </Link>
+          {user && user ? (
+            <Link className="nav-link" to="/articles">
+              <Menu.Item name="articles" />
+            </Link>
+          ) : (
+            ''
+          )}
+          {user && user ? (
+            <Link className="nav-link" to="/users">
+              <Menu.Item name="users" />
+            </Link>
+          ) : (
+            ''
+          )}
+          {user && user ? (
+            <Link className="nav-link" to="/topics">
+              <Menu.Item name="topics" />
+            </Link>
+          ) : (
+            ''
+          )}
+          <Menu.Menu position="right">
+            <Menu.Item>
+              <Dropdown
+                placeholder="Select User"
+                selection
+                options={this.state.usernames}
+                onChange={this.props.selectUser}
+              />
+            </Menu.Item>
+          </Menu.Menu>
+        </Menu>
+      </Container>
     );
   }
 }

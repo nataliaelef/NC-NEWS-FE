@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, TextArea, Button, Header } from 'semantic-ui-react';
 
-class AddComment extends Component {
+class CommentAdder extends Component {
   state = {
     body: ''
   };
@@ -43,4 +43,4 @@ class AddComment extends Component {
   }
 }
 
-export default AddComment;
+export default CommentAdder;

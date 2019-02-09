@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Image } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import Comments from './Comments';
-import AddComment from './AddComment';
+import CommentAdder from './CommentAdder';
 
 class Article extends Component {
   state = {
@@ -69,7 +69,7 @@ class Article extends Component {
             Downvote
           </Button>
         </div>
-        <AddComment
+        <CommentAdder
           articleId={articleId}
           postedComment={this.postedComment}
           user={user}

@@ -3,7 +3,7 @@ import { Link } from '@reach/router';
 import { Card, Image } from 'semantic-ui-react';
 // import Article from '../components/Article';
 import * as api from '../utils/api';
-import AddArticle from '../components/AddArticle';
+import ArticleAdder from './ArticleAdder';
 import { Dropdown } from '../components/common/Dropdown';
 import Moment from 'react-moment';
 
@@ -94,7 +94,7 @@ class Articles extends Component {
           />
           <div className="articles">{this.renderArticles()}</div>
           <div className="divider" />
-          <AddArticle
+          <ArticleAdder
             slug={this.props.topic}
             user={this.props.user}
             postedArticle={this.postedArticle}

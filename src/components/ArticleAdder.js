@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, TextArea, Button } from 'semantic-ui-react';
 
-class AddArticle extends Component {
+class ArticleAdder extends Component {
   state = {
     title: '',
     body: ''
@@ -50,4 +50,4 @@ class AddArticle extends Component {
   }
 }
 
-export default AddArticle;
+export default ArticleAdder;

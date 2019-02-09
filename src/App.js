@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 import { Router } from '@reach/router';
 import './App.css';
 import Nav from './components/Nav';
-import Header from './components/Header';
-import Home from './components/Home';
 import Users from './components/Users';
 import Topics from './components/Topics';
 import Articles from './components/Articles';
 import Article from './components/Article';
+import { Container } from 'semantic-ui-react';
 
 class App extends Component {
   state = {
@@ -15,10 +14,8 @@ class App extends Component {
     topic: ''
   };
 
-  onSelectUser = selectedUser => {
-    this.setState({ user: selectedUser });
-    if (!selectedUser) {
-    }
+  onSelectUser = (e, { value }) => {
+    this.setState({ user: value });
   };
 
   onSelectTopic = selectedTopic => {
@@ -31,9 +28,9 @@ class App extends Component {
     if (this.state.user) {
       return (
         <Router className="main-content">
-          <Home path="/" user={this.state.user} />
           <Users path="/users" user={this.state.user} />
           <Topics path="/topics" user={this.state.user} />
+          <Articles path="/" />
           <Articles path="/articles" user={this.state.user} />
           <Article path="/articles/:id" user={this.state.user} />
           <Articles
@@ -46,7 +43,7 @@ class App extends Component {
     } else {
       return (
         <Router className="main-content">
-          <Home path="/" />
+          <Articles path="/" />
           <Article path="/articles/:id" />
         </Router>
       );
@@ -55,15 +52,14 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <Header user={this.state.user} />
+      <Container className="App" fluid>
         <Nav
           selectUser={this.onSelectUser}
           user={this.state.user}
           selectTopic={this.onSelectTopic}
         />
         {this.renderMenu()}
-      </div>
+      </Container>
     );
   }
 }
