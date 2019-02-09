@@ -21,7 +21,8 @@ body {
 }
 
 .article-card,
-.sortBy-dropdown {
+.sortBy-dropdown,
+.user-card {
   margin: 0.5em !important;
 }
 
@@ -58,29 +59,6 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 13ch;
-}
-
-.users {
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(4, auto);
-  grid-auto-rows: auto;
-  grid-gap: 10px 10px;
-  justify-content: center;
-}
-
-.users a {
-  display: flex;
-}
-
-.ui image {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 40ch;
-}
-
-.users a .ui.card:first-child {
-  margin: 1em 0;
 }
 
 .comment {
