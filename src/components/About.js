@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  Header,
-  Container,
-  Grid,
-  Segment,
-  GridColumn
-} from 'semantic-ui-react';
+import { Header, Container, Grid } from 'semantic-ui-react';
 
 const About = () => {
   return (
