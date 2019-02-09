@@ -26,10 +26,11 @@ body {
   margin: 0.5em !important;
 }
 
-.article-card .description {
+.article-card .description,
+.topic-card .description {
   overflow: hidden;
   text-overflow: ellipsis;
-  max-height: 10ch;
+  height: 10ch;
 }
 
 /* .topic-main {

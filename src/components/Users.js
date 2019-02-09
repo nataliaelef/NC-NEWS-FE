@@ -18,11 +18,11 @@ class Users extends Component {
     return (
       <Grid className="users-grid">
         {users.map(user => (
-          <Grid.Column computer={4} mobile={16}>
+          <Grid.Column computer={4} mobile={16} key={user.username}>
             <Link
               to={`/users/${user.username}`}
               key={user.username}
-              // className="user-card"
+              className="user-card"
             >
               <Card>
                 <Image

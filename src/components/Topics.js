@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card } from 'semantic-ui-react';
+import { Card, Grid } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import TopicAdder from './TopicAdder';
 
@@ -16,28 +16,35 @@ class Topics extends Component {
       }));
     });
   };
-
-  renderTopics = () => {
-    const { topics } = this.state;
-    return topics.map(topic => (
-      <Link to={`/topics/${topic.slug}/articles`} key={topic.slug}>
-        <Card link header={topic.slug} description={topic.description} />
-      </Link>
-    ));
-  };
-
   componentDidMount = async () => {
     const topics = await api.getTopics();
     this.setState({ topics });
   };
 
   render() {
+    const { topics } = this.state;
     return (
-      <div className="topic-main">
-        <div className="topics">{this.renderTopics()}</div>
-        <div className="divider" />
-        <TopicAdder postedTopic={this.postedTopic} user={this.props.user} />
-      </div>
+      <Grid className="topics-grid" divided reversed="mobile vertically">
+        <Grid.Column computer={12} mobile={4}>
+          <Grid className="topics">
+            {topics.map(topic => (
+              <Grid.Column computer={4} mobile={16} key={topic.slug}>
+                <Link to={`/topics/${topic.slug}/articles`} key={topic.slug}>
+                  <Card
+                    link
+                    header={topic.slug}
+                    description={topic.description}
+                    className="topic-card"
+                  />
+                </Link>
+              </Grid.Column>
+            ))}
+          </Grid>
+        </Grid.Column>
+        <Grid.Column computer={4} mobile={16}>
+          <TopicAdder postedTopic={this.postedTopic} user={this.props.user} />
+        </Grid.Column>
+      </Grid>
     );
   }
 }

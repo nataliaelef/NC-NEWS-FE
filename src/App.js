@@ -6,6 +6,7 @@ import Users from './components/Users';
 import Topics from './components/Topics';
 import Articles from './components/Articles';
 import Article from './components/Article';
+import About from './components/About';
 import { Container, Segment } from 'semantic-ui-react';
 
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
       return (
         <Segment>
           <Router className="main-content">
+            <About path="/about" />
             <Users path="/users" user={this.state.user} />
             <Topics path="/topics" user={this.state.user} />
             <Articles path="/" />
@@ -46,6 +48,7 @@ class App extends Component {
       return (
         <Segment>
           <Router className="main-content">
+            <About path="/about" />
             <Articles path="/" />
             <Article path="/articles/:id" />
           </Router>
