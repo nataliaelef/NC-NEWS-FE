@@ -6,7 +6,7 @@ import Users from './components/Users';
 import Topics from './components/Topics';
 import Articles from './components/Articles';
 import Article from './components/Article';
-import { Container } from 'semantic-ui-react';
+import { Container, Segment } from 'semantic-ui-react';
 
 class App extends Component {
   state = {
@@ -27,25 +27,29 @@ class App extends Component {
   renderMenu = () => {
     if (this.state.user) {
       return (
-        <Router className="main-content">
-          <Users path="/users" user={this.state.user} />
-          <Topics path="/topics" user={this.state.user} />
-          <Articles path="/" />
-          <Articles path="/articles" user={this.state.user} />
-          <Article path="/articles/:id" user={this.state.user} />
-          <Articles
-            path="/topics/:topic/articles"
-            topic={this.state.topic}
-            user={this.state.user}
-          />
-        </Router>
+        <Segment>
+          <Router className="main-content">
+            <Users path="/users" user={this.state.user} />
+            <Topics path="/topics" user={this.state.user} />
+            <Articles path="/" />
+            <Articles path="/articles" user={this.state.user} />
+            <Article path="/articles/:id" user={this.state.user} />
+            <Articles
+              path="/topics/:topic/articles"
+              topic={this.state.topic}
+              user={this.state.user}
+            />
+          </Router>
+        </Segment>
       );
     } else {
       return (
-        <Router className="main-content">
-          <Articles path="/" />
-          <Article path="/articles/:id" />
-        </Router>
+        <Segment>
+          <Router className="main-content">
+            <Articles path="/" />
+            <Article path="/articles/:id" />
+          </Router>
+        </Segment>
       );
     }
   };

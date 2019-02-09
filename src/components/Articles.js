@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card, Image } from 'semantic-ui-react';
-// import Article from '../components/Article';
+import { Card, Image, Grid, Dropdown } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import ArticleAdder from './ArticleAdder';
-import { Dropdown } from '../components/common/Dropdown';
+
 import Moment from 'react-moment';
 
 class Articles extends Component {
@@ -16,27 +15,28 @@ class Articles extends Component {
   renderArticles = () => {
     const { articles } = this.state;
     return articles.map(article => (
-      <Link to={`/articles/${article.article_id}`} key={article.article_id}>
-        <Card>
-          <Card.Content>
-            <Image
-              floated="right"
-              size="mini"
-              src={`https://api.adorable.io/avatars/${Math.round(
-                Math.random() * 1000
-              )}`}
-            />
-
+      <Card key={article.article_id} className="article-card">
+        <Card.Content>
+          <Image
+            floated="right"
+            size="mini"
+            src={`https://api.adorable.io/avatars/${Math.round(
+              Math.random() * 1000
+            )}`}
+          />
+          <Link to={`/articles/${article.article_id}`}>
             <Card.Header>{article.title}</Card.Header>
+          </Link>
+          <Link to={`/topics/${article.topic}/articles`}>
             <Card.Meta>{article.topic}</Card.Meta>
-            <Card.Meta>{article.author}</Card.Meta>
-            <Card.Meta>
-              <Moment format="YYYY/MM/DD">{article.created_at}</Moment>
-            </Card.Meta>
-            <Card.Description>{article.body}</Card.Description>
-          </Card.Content>
-        </Card>
-      </Link>
+          </Link>
+          <Card.Meta>{article.author}</Card.Meta>
+          <Card.Meta>
+            <Moment format="YYYY/MM/DD">{article.created_at}</Moment>
+          </Card.Meta>
+          <Card.Description>{article.body}</Card.Description>
+        </Card.Content>
+      </Card>
     ));
   };
 
@@ -58,9 +58,8 @@ class Articles extends Component {
   };
 
   sortOptions = [
-    { label: 'Please select', value: '' },
-    { label: 'Date created', value: 'created_at' },
-    { label: 'Votes', value: 'votes' }
+    { text: 'Date created', value: 'created_at' },
+    { text: 'Votes', value: 'votes' }
   ];
 
   updateArticles = async () => {
@@ -84,35 +83,42 @@ class Articles extends Component {
   };
 
   render() {
-    if (this.props.topic) {
-      return (
-        <div className="article-main">
-          <Dropdown
-            label="Sort by"
-            options={this.sortOptions}
-            onValueChange={this.selectSortOption}
-          />
-          <div className="articles">{this.renderArticles()}</div>
-          <div className="divider" />
-          <ArticleAdder
-            slug={this.props.topic}
-            user={this.props.user}
-            postedArticle={this.postedArticle}
-          />
-        </div>
-      );
-    } else {
-      return (
-        <div className="article-main">
-          <Dropdown
-            label="Sort by"
-            options={this.sortOptions}
-            onValueChange={this.selectSortOption}
-          />
-          <div className="articles">{this.renderArticles()}</div>
-        </div>
-      );
-    }
+    const articlesColumnWidth = this.props.topic ? 12 : 16;
+    return (
+      <Grid reversed="mobile vertically" divided>
+        <Grid.Column computer={articlesColumnWidth} mobile={16}>
+          {this.props.topic && this.props.topic ? (
+            <Grid.Row>
+              <Dropdown
+                placeholder="Sort by"
+                selection
+                options={this.sortOptions}
+                onChange={() => {}}
+                className="sortBy-dropdown"
+              />
+            </Grid.Row>
+          ) : (
+            ''
+          )}
+          <Grid.Row>
+            <Grid className="articles" padded>
+              {this.renderArticles()}
+            </Grid>
+          </Grid.Row>
+        </Grid.Column>
+        {this.props.topic && this.props.topic ? (
+          <Grid.Column computer={4} mobile={16}>
+            <ArticleAdder
+              slug={this.props.topic}
+              user={this.props.user}
+              postedArticle={this.postedArticle}
+            />
+          </Grid.Column>
+        ) : (
+          ''
+        )}
+      </Grid>
+    );
   }
 }
 

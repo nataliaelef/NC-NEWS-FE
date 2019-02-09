@@ -2,140 +2,36 @@ body {
   margin: 0;
 }
 
-.App {
-  display: grid;
-  grid-template-rows: 8em 3em 1fr;
-  grid-auto-columns: auto;
-  height: 92vh;
-}
-
-.main-header {
-  background-color: #7719aa;
-  font-weight: 900;
-  grid-row: 1;
-  display: grid;
-  grid-template-rows: 50% 50%;
-  grid-template-columns: auto;
-  align-items: center;
-  justify-content: center;
-}
-
-.main-header .title {
-  grid-row: 1;
-  display: flex;
-  align-items: center;
-  color: white !important;
-}
-
-.main-header .paragraph {
-  grid-row: 2;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  color: white !important;
-  background-color: #7719aa !important;
-}
-
 .nav-bar {
   background-color: #7719aa;
-  color: white;
   padding: 10px;
-  grid-row: 2;
-  display: grid;
-  grid-template-rows: auto;
 }
 
 .nav-bar .ui.menu {
   align-items: center;
 }
-.nav-links .item {
-  color: white !important;
+
+.segment {
+  box-shadow: none !important;
+  border: 0 !important;
 }
 
-.nav-link {
-  /* color: white; */
-  text-decoration: none;
+.main-content {
+  margin: 0 1em 1em 1em;
 }
 
-.nav-links {
-  display: grid;
-  align-content: center;
-  grid-template-rows: auto;
-  grid-template-columns: auto auto auto auto;
+.article-card,
+.sortBy-dropdown {
+  margin: 0.5em !important;
 }
 
-.logged-user {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.nav-bar .label {
-  color: white;
-}
-
-.dropdown {
-  display: flex;
-  align-items: center;
-}
-
-.dropdown .label {
-  margin-right: 5%;
-}
-
-.dropdown option {
-  padding: 10px;
-}
-
-.article-main {
-  padding: 10px;
-  grid-row: 3;
-  display: grid;
-  grid-template-columns: 74% 2% 24%;
-  grid-template-rows: 3em auto;
-}
-
-.articles {
-  grid-row: 2;
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-auto-rows: auto;
-  grid-gap: 0 10px;
-}
-
-.articles a {
-  display: flex;
-}
-
-.articles a .ui.card:first-child {
-  margin: 1em 0;
-}
-
-.articles a .ui.card .description {
+.article-card .description {
   overflow: hidden;
   text-overflow: ellipsis;
   max-height: 10ch;
 }
 
-.article-main .divider {
-  grid-row: 1 / span 2;
-  border-left: 1px solid grey;
-  padding: 10px 0;
-  display: flex;
-  height: auto;
-}
-.divider {
-  border-left: 1px solid grey;
-  padding: 10px 0;
-  display: flex;
-  height: auto;
-}
-
-.article {
-  margin-top: 3em;
-}
-
-.topic-main {
+/* .topic-main {
   padding: 10px;
   grid-row: 3;
   display: grid;
@@ -189,10 +85,5 @@ body {
 
 .comment {
   margin-top: 10px;
-}
-
-/* @media only screen and (min-width: 600px) {
-  .card {
-    background-color: lightblue;
-  }
-} */
+} 
+ */
