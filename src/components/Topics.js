@@ -34,8 +34,6 @@ class Topics extends Component {
 
   render() {
     const { topics, redirect } = this.state;
-    const { slug, description } = this.props;
-
     return !redirect ? (
       <Grid className="topics-grid" divided reversed="mobile vertically">
         <Grid.Column computer={12} mobile={4}>

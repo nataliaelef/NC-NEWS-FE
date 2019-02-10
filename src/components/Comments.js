@@ -3,20 +3,22 @@ import { Comment, Header } from 'semantic-ui-react';
 import CommentItem from './CommentItem';
 
 const Comments = props => {
+  console.log(props);
+
   return (
     <Comment.Group>
       <Header as="h3" dividing>
         Comments
       </Header>
-      {renderComments(props.comments)}
+      {props.comments.map(comment => (
+        <CommentItem
+          comment={comment}
+          user={props.user}
+          key={comment.comment_id}
+        />
+      ))}
     </Comment.Group>
   );
-};
-
-const renderComments = comments => {
-  return comments.map(comment => (
-    <CommentItem comment={comment} key={comment.comment_id} />
-  ));
 };
 
 export default Comments;

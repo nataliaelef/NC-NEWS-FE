@@ -117,7 +117,7 @@ class Article extends Component {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
-          <Comments comments={comments} />
+          <Comments comments={comments} user={user} />
         </Grid.Row>
       </Grid>
     ) : (

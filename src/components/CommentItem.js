@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Comment, Button } from 'semantic-ui-react';
+import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import Moment from 'react-moment';
 
@@ -7,7 +8,14 @@ class CommentItem extends Component {
   state = {
     comment: {},
     votes: 0,
-    imageNum: Math.round(Math.random() * 1000)
+    imageNum: Math.round(Math.random() * 1000),
+    redirect: null
+  };
+
+  handleDelete = (commentId, articleId) => {
+    api.deleteCommentByCommentId(articleId, commentId).then(() => {
+      this.setState({ redirect: `/articles/${articleId}` });
+    });
   };
 
   handleCommentVoteClick = addedVote => {
@@ -24,9 +32,9 @@ class CommentItem extends Component {
   };
 
   render() {
-    const { comment } = this.props;
-    const { votes } = this.state;
-    return (
+    const { user } = this.props;
+    const { votes, comment, redirect } = this.state;
+    return !redirect ? (
       <Comment key={comment.comment_id}>
         <Comment.Avatar
           src={`https://api.adorable.io/avatars/${this.state.imageNum}`}
@@ -52,9 +60,24 @@ class CommentItem extends Component {
               disabled={votes === -1}
               onClick={() => this.handleCommentVoteClick(-1)}
             />
+            {user === comment.author ? (
+              <Button
+                primary
+                floated="right"
+                onClick={() =>
+                  this.handleDelete(comment.comment_id, comment.article_id)
+                }
+              >
+                Delete Comment
+              </Button>
+            ) : (
+              ''
+            )}
           </Comment.Actions>
         </Comment.Content>
       </Comment>
+    ) : (
+      <Redirect noThrow to={redirect} />
     );
   }
 }

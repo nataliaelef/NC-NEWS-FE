@@ -65,6 +65,13 @@ export const addCommentByArticleId = async (body, username, articleId) => {
   return { ...comment, author: comment.username };
 };
 
+export const deleteCommentByCommentId = (articleId, commentId) => {
+  return axios({
+    method: 'delete',
+    url: `${BASE_URL}/articles/${articleId}/comments/${commentId}`
+  }).then({});
+};
+
 // article votes
 export const voteOnArticle = (addedVote, articleId) => {
   return axios({
