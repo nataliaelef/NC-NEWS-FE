@@ -68,26 +68,30 @@ class Article extends Component {
           <div className="votes">Votes: {article.votes + votes} </div>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column computer={8} mobile={8}>
-            <Grid.Row>
-              <Button
-                basic
-                color="green"
-                disabled={votes === 1}
-                onClick={() => this.handleVoteClick(1)}
-              >
-                Upvote
-              </Button>
-              <Button
-                basic
-                color="red"
-                disabled={votes === -1}
-                onClick={() => this.handleVoteClick(-1)}
-              >
-                Downvote
-              </Button>
-            </Grid.Row>
-          </Grid.Column>
+          {user ? (
+            <Grid.Column computer={8} mobile={8}>
+              <Grid.Row>
+                <Button
+                  basic
+                  color="green"
+                  disabled={votes === 1}
+                  onClick={() => this.handleVoteClick(1)}
+                >
+                  Upvote
+                </Button>
+                <Button
+                  basic
+                  color="red"
+                  disabled={votes === -1}
+                  onClick={() => this.handleVoteClick(-1)}
+                >
+                  Downvote
+                </Button>
+              </Grid.Row>
+            </Grid.Column>
+          ) : (
+            ''
+          )}
           {user === article.author ? (
             <Grid.Column computer={8} mobile={8}>
               <Button
