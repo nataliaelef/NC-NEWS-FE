@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import { Card, Image, Grid, Dropdown, Header } from 'semantic-ui-react';
+import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import ArticleAdder from './ArticleAdder';
 
@@ -9,7 +10,8 @@ import Moment from 'react-moment';
 class Articles extends Component {
   state = {
     articles: [],
-    topics: ''
+    topics: '',
+    redirect: null
   };
 
   renderArticles = () => {
@@ -44,12 +46,7 @@ class Articles extends Component {
 
   postedArticle = (title, body, slug, user) => {
     api.addArticleByTopic(title, body, slug, user).then(article => {
-      this.setState(prevState => ({
-        articles: [
-          ...prevState.articles,
-          { author: article.username, ...article }
-        ]
-      }));
+      this.setState({ redirect: `/articles/${article.article_id}` });
     });
   };
 
@@ -86,7 +83,8 @@ class Articles extends Component {
 
   render() {
     const articlesColumnWidth = this.props.topic ? 12 : 16;
-    return (
+    const { redirect } = this.state;
+    return !redirect ? (
       <Grid reversed="mobile vertically" divided>
         <Grid.Column computer={articlesColumnWidth} mobile={16}>
           {this.props.topic && this.props.topic ? (
@@ -127,6 +125,8 @@ class Articles extends Component {
           ''
         )}
       </Grid>
+    ) : (
+      <Redirect noThrow to={redirect} />
     );
   }
 }

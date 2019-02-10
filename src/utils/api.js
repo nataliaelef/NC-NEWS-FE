@@ -28,7 +28,7 @@ export const deleteArticle = articleId => {
   return axios({
     method: 'delete',
     url: `${BASE_URL}/articles/${articleId}`
-  }).then(({ article }) => console.log(article));
+  }).then();
 };
 
 // Topics
@@ -41,6 +41,13 @@ export const addTopic = async (slug, description) =>
 export const getArticlesByTopic = async topic =>
   (await axios.get(`${BASE_URL}/topics/${topic}/articles?limit=50`)).data
     .articles;
+
+export const deleteTopicBySlug = slug => {
+  return axios({
+    method: 'delete',
+    url: `${BASE_URL}/topics/${slug}`
+  }).then();
+};
 
 // Comments
 export const getCommentsByArticleId = async articleId =>

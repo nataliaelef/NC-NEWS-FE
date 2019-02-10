@@ -39,7 +39,13 @@ class TopicAdder extends Component {
             onChange={this.handleChange}
             control={TextArea}
           />
-          <Button primary type="Submit">
+          <Button
+            primary
+            type="Submit"
+            disabled={
+              !slug || !slug.trim() || !description || !description.trim()
+            }
+          >
             Submit
           </Button>
         </Form>

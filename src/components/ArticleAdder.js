@@ -45,7 +45,7 @@ class ArticleAdder extends Component {
           <Button
             primary
             type="Submit"
-            disabled={!title || !body || !body.trim()}
+            disabled={!title || !title.trim() || !body || !body.trim()}
           >
             Submit
           </Button>

@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import { Button, Image, Grid, Header } from 'semantic-ui-react';
+import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import Comments from './Comments';
 import CommentAdder from './CommentAdder';
-import { Router, Redirect, Link } from '@reach/router';
 
 class Article extends Component {
   state = {
     article: {},
     comments: [],
-    votes: 0
+    votes: 0,
+    redirect: null
   };
 
   handleDelete = articleId => {
     api.deleteArticle(articleId).then(() => {
-      this.setState({ article: null });
+      this.setState({ redirect: '/articles' });
     });
   };
 
@@ -42,9 +43,9 @@ class Article extends Component {
   };
 
   render() {
-    const { article, votes, comments } = this.state;
+    const { article, votes, comments, redirect } = this.state;
     const { id: articleId, user } = this.props;
-    return article ? (
+    return !redirect ? (
       <Grid className="ui container">
         <Grid.Row>
           <h1 className="ui header">{article.title}</h1>
@@ -95,7 +96,6 @@ class Article extends Component {
           {user === article.author ? (
             <Grid.Column computer={8} mobile={8}>
               <Button
-                // disabled={user !== article.username}
                 primary
                 floated="right"
                 onClick={() => this.handleDelete(articleId)}
@@ -121,12 +121,7 @@ class Article extends Component {
         </Grid.Row>
       </Grid>
     ) : (
-      <Grid>
-        <Header as="h2">
-          Article had been deleted. Click <Link to="/articles">here</Link> to go
-          to the articles page
-        </Header>
-      </Grid>
+      <Redirect noThrow to={redirect} />
     );
   }
 }
