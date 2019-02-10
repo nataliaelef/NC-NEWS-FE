@@ -28,7 +28,8 @@ class CommentAdder extends Component {
           Add comment
         </Header>
         <Form.Input
-          width={3}
+          computer={6}
+          mobile={16}
           placeholder="Comment"
           name="body"
           value={body}

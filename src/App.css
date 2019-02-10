@@ -33,6 +33,10 @@ body {
   height: 10ch;
 }
 
+.topic-title {
+  text-align: center;
+}
+
 /* .topic-main {
   padding: 10px;
   grid-row: 3;

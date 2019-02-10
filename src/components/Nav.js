@@ -17,6 +17,7 @@ class Nav extends Component {
         Math.random() * 1000
       )}`
     }));
+    usernames.unshift({ label: 'Select user', value: '' });
     this.setState({ usernames });
   };
 
@@ -31,9 +32,7 @@ class Nav extends Component {
           <Link className="nav-link" to="/">
             <Menu.Item name="home" />
           </Link>
-          <Link className="nav-link" to="/about">
-            <Menu.Item name="about" />
-          </Link>
+
           {user && user ? (
             <Link className="nav-link" to="/articles">
               <Menu.Item name="articles" />
@@ -55,11 +54,15 @@ class Nav extends Component {
           ) : (
             ''
           )}
+          <Link className="nav-link" to="/about">
+            <Menu.Item name="about" />
+          </Link>
           <Menu.Menu position="right">
             <Menu.Item>
               <Dropdown
                 placeholder="Select User"
                 selection
+                defaultValue={user}
                 options={this.state.usernames}
                 onChange={this.props.selectUser}
               />

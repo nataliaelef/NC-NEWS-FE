@@ -11,11 +11,12 @@ import { Container, Segment } from 'semantic-ui-react';
 
 class App extends Component {
   state = {
-    user: '',
+    user: localStorage.getItem('user'),
     topic: ''
   };
 
   onSelectUser = (e, { value }) => {
+    localStorage.setItem('user', value);
     this.setState({ user: value });
   };
 
@@ -33,7 +34,7 @@ class App extends Component {
             <About path="/about" />
             <Users path="/users" user={this.state.user} />
             <Topics path="/topics" user={this.state.user} />
-            <Articles path="/" />
+            <Articles path="/" user={this.state.user} />
             <Articles path="/articles" user={this.state.user} />
             <Article path="/articles/:id" user={this.state.user} />
             <Articles

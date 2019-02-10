@@ -9,13 +9,14 @@ class ArticleAdder extends Component {
 
   handleOnChange = (e, { name, value }) => {
     e.preventDefault();
-
-    //[name] to evaluate the and not give a key
     this.setState({ [name]: value });
   };
 
   handleOnSubmit = () => {
     const { title, body } = this.state;
+    if (!title || !body) {
+      return;
+    }
     const { slug, user, postedArticle } = this.props;
     postedArticle(title, body, slug, user);
     this.setState({ title: '', body: '' });
@@ -41,7 +42,11 @@ class ArticleAdder extends Component {
             onChange={this.handleOnChange}
             control={TextArea}
           />
-          <Button primary type="Submit" onClick={this.handleOnSubmit}>
+          <Button
+            primary
+            type="Submit"
+            disabled={!title || !body || !body.trim()}
+          >
             Submit
           </Button>
         </Form>

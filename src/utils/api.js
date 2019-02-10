@@ -24,6 +24,13 @@ export const addArticleByTopic = async (title, body, topic, username) =>
     username
   })).data.article;
 
+export const deleteArticle = articleId => {
+  return axios({
+    method: 'delete',
+    url: `${BASE_URL}/articles/${articleId}`
+  }).then(({ article }) => console.log(article));
+};
+
 // Topics
 export const getTopics = async () =>
   (await axios.get(`${BASE_URL}/topics?limit=50`)).data.topics;
@@ -51,7 +58,7 @@ export const addCommentByArticleId = async (body, username, articleId) => {
   return { ...comment, author: comment.username };
 };
 
-//votes
+// article votes
 export const voteOnArticle = (addedVote, articleId) => {
   return axios({
     method: 'patch',
@@ -63,7 +70,7 @@ export const voteOnArticle = (addedVote, articleId) => {
   }).then(({ data: { article } }) => article);
 };
 
-//votes
+// comment votes
 export const voteOnComment = (addedVote, articleId, commentId) => {
   return axios({
     method: 'patch',

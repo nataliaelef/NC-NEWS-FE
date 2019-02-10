@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card, Image, Grid, Dropdown } from 'semantic-ui-react';
+import { Card, Image, Grid, Dropdown, Header } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import ArticleAdder from './ArticleAdder';
 
@@ -25,7 +25,9 @@ class Articles extends Component {
             )}`}
           />
           <Link to={`/articles/${article.article_id}`}>
-            <Card.Header>{article.title}</Card.Header>
+            <Card.Header>
+              {article.title && article.title ? article.title : 'No Title'}
+            </Card.Header>
           </Link>
           <Link to={`/topics/${article.topic}/articles`}>
             <Card.Meta>{article.topic}</Card.Meta>
@@ -89,13 +91,20 @@ class Articles extends Component {
         <Grid.Column computer={articlesColumnWidth} mobile={16}>
           {this.props.topic && this.props.topic ? (
             <Grid.Row>
-              <Dropdown
-                placeholder="Sort by"
-                selection
-                options={this.sortOptions}
-                onChange={() => {}}
-                className="sortBy-dropdown"
-              />
+              <Grid.Row>
+                <Grid.Column computer={16} mobile={16} className="topic-title">
+                  <Header>{this.props.topic.toUpperCase()}</Header>
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Dropdown
+                  placeholder="Sort by"
+                  selection
+                  options={this.sortOptions}
+                  onChange={() => {}}
+                  className="sortBy-dropdown"
+                />
+              </Grid.Row>
             </Grid.Row>
           ) : (
             ''

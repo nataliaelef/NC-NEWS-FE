@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card, Grid } from 'semantic-ui-react';
+import { Card, Grid, Header } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import TopicAdder from './TopicAdder';
 
@@ -10,7 +10,7 @@ class Topics extends Component {
   };
 
   postedTopic = (slug, description) => {
-    api.addTopic(slug, description).then(topic => {
+    api.addTopic(slug.toLowerCase(), description).then(topic => {
       this.setState(prevState => ({
         topics: [...prevState.topics, topic]
       }));
@@ -23,6 +23,7 @@ class Topics extends Component {
 
   render() {
     const { topics } = this.state;
+
     return (
       <Grid className="topics-grid" divided reversed="mobile vertically">
         <Grid.Column computer={12} mobile={4}>
