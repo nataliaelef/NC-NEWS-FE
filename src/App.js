@@ -8,6 +8,7 @@ import Articles from './components/Articles';
 import Article from './components/Article';
 import About from './components/About';
 import { Container, Segment } from 'semantic-ui-react';
+import PageNotFound from './components/PageNotFound';
 
 class App extends Component {
   state = {
@@ -31,6 +32,7 @@ class App extends Component {
       return (
         <Segment>
           <Router className="main-content">
+            <PageNotFound default />
             <About path="/about" />
             <Users path="/users" user={this.state.user} />
             <Topics path="/topics" user={this.state.user} />
@@ -49,6 +51,7 @@ class App extends Component {
       return (
         <Segment>
           <Router className="main-content">
+            <PageNotFound default />
             <About path="/about" />
             <Articles path="/" />
             <Article path="/articles/:id" />

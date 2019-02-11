@@ -14,6 +14,7 @@ class Users extends Component {
 
   render() {
     const { users } = this.state;
+
     return (
       <Grid className="users-grid">
         {users.map(user => (
