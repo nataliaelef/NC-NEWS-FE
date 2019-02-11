@@ -4,13 +4,15 @@ import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import Comments from './Comments';
 import CommentAdder from './CommentAdder';
+import PageNotFound from './PageNotFound';
 
 class Article extends Component {
   state = {
     article: {},
     comments: [],
     votes: 0,
-    redirect: null
+    redirect: null,
+    hasError: false
   };
 
   handleDelete = articleId => {
@@ -37,14 +39,24 @@ class Article extends Component {
 
   componentDidMount = async () => {
     const { id } = this.props;
-    const article = await api.getArticleById(id);
+    const article = await api
+      .getArticleById(id)
+      .then(() => {
+        this.setState({ article });
+      })
+      .catch(err => {
+        this.setState({ hasError: true });
+      });
+
     const comments = await api.getCommentsByArticleId(id);
     this.setState({ article, comments });
   };
 
   render() {
-    const { article, votes, comments, redirect } = this.state;
+    const { article, votes, comments, redirect, hasError } = this.state;
     const { id: articleId, user } = this.props;
+    if (hasError) return <PageNotFound />;
+
     return !redirect ? (
       <Grid className="ui container">
         <Grid.Row>
