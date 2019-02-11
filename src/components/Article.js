@@ -37,17 +37,24 @@ class Article extends Component {
     });
   };
 
+  // componentDidMount = async () => {
+  //   const { id } = this.props;
+  //   const article = await api
+  //     .getArticleById(id)
+  //     .then(article => {
+  //       this.setState({ article });
+  //     })
+  //     .catch(err => {
+  //       this.setState({ hasError: true });
+  //     });
+
+  //   const comments = await api.getCommentsByArticleId(id);
+  //   this.setState({ article, comments });
+  // };
+
   componentDidMount = async () => {
     const { id } = this.props;
-    const article = await api
-      .getArticleById(id)
-      .then(() => {
-        this.setState({ article });
-      })
-      .catch(err => {
-        this.setState({ hasError: true });
-      });
-
+    const article = await api.getArticleById(id);
     const comments = await api.getCommentsByArticleId(id);
     this.setState({ article, comments });
   };
@@ -55,8 +62,9 @@ class Article extends Component {
   render() {
     const { article, votes, comments, redirect, hasError } = this.state;
     const { id: articleId, user } = this.props;
-    if (hasError) return <PageNotFound />;
-
+    // if (hasError) {
+    //   return <PageNotFound />;
+    // } else {
     return !redirect ? (
       <Grid className="ui container">
         <Grid.Row>
@@ -136,6 +144,7 @@ class Article extends Component {
       <Redirect noThrow to={redirect} />
     );
   }
+  // }
 }
 
 export default Article;
