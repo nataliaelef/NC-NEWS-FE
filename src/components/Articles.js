@@ -83,7 +83,7 @@ class Articles extends Component {
 
   render() {
     const articlesColumnWidth = this.props.topic ? 12 : 16;
-    const { redirect } = this.state;
+    const { redirect, articles } = this.state;
     return !redirect ? (
       <Grid reversed="mobile vertically" divided>
         <Grid.Column computer={articlesColumnWidth} mobile={16}>
@@ -95,13 +95,17 @@ class Articles extends Component {
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
-                <Dropdown
-                  placeholder="Sort by"
-                  selection
-                  options={this.sortOptions}
-                  onChange={() => {}}
-                  className="sortBy-dropdown"
-                />
+                {articles.length ? (
+                  <Dropdown
+                    placeholder="Sort by"
+                    selection
+                    options={this.sortOptions}
+                    onChange={() => {}}
+                    className="sortBy-dropdown"
+                  />
+                ) : (
+                  ''
+                )}
               </Grid.Row>
             </Grid.Row>
           ) : (
@@ -109,7 +113,13 @@ class Articles extends Component {
           )}
           <Grid.Row>
             <Grid className="articles" padded>
-              {this.renderArticles()}
+              {articles.length ? (
+                this.renderArticles()
+              ) : (
+                <Header as="h1">
+                  There are no articles for this topic yet
+                </Header>
+              )}
             </Grid>
           </Grid.Row>
         </Grid.Column>
