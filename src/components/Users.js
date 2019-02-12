@@ -20,11 +20,7 @@ class Users extends Component {
         {users.map(user => (
           <Grid.Column computer={4} mobile={16} key={user.username}>
             <Card>
-              <Image
-                src={`https://api.adorable.io/avatars/${Math.round(
-                  Math.random() * 1000
-                )}`}
-              />
+              <Image src={user.avatar_url} />
               <Card.Content>
                 <Card.Header>{user.username}</Card.Header>
                 <Card.Meta>{user.name}</Card.Meta>

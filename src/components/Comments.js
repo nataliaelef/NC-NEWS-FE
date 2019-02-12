@@ -3,8 +3,6 @@ import { Comment, Header } from 'semantic-ui-react';
 import CommentItem from './CommentItem';
 
 const Comments = props => {
-  console.log(props);
-
   return (
     <Comment.Group>
       <Header as="h3" dividing>

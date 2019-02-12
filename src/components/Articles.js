@@ -19,13 +19,7 @@ class Articles extends Component {
     return articles.map(article => (
       <Card key={article.article_id} className="article-card">
         <Card.Content>
-          <Image
-            floated="right"
-            size="mini"
-            src={`https://api.adorable.io/avatars/${Math.round(
-              Math.random() * 1000
-            )}`}
-          />
+          <Image floated="right" size="mini" src={article.avatar_url} />
           <Link to={`/articles/${article.article_id}`}>
             <Card.Header>
               {article.title && article.title ? article.title : 'No Title'}

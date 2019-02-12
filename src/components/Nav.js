@@ -13,9 +13,7 @@ class Nav extends Component {
     const usernames = users.map(user => ({
       text: user.username,
       value: user.username,
-      image: `https://api.adorable.io/avatars/${Math.round(
-        Math.random() * 1000
-      )}`
+      image: user.avatar_url
     }));
     usernames.unshift({ label: 'Select user', value: '' });
     this.setState({ usernames });

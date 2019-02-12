@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Image, Grid, Header } from 'semantic-ui-react';
+import { Button, Grid, Header } from 'semantic-ui-react';
 import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import Comments from './Comments';
@@ -63,13 +63,7 @@ class Article extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column floated="right" computer={2} mobile={8}>
-              <Image
-                floated="right"
-                size="mini"
-                src={`https://api.adorable.io/avatars/${Math.round(
-                  Math.random() * 1000
-                )}`}
-              />
+              {/* <Image floated="right" size="mini" src={user.avatar_url} /> */}
               <Header as="h4">{article.author}</Header>
             </Grid.Column>
           </Grid.Row>

@@ -8,7 +8,6 @@ class CommentItem extends Component {
   state = {
     comment: {},
     votes: 0,
-    imageNum: Math.round(Math.random() * 1000),
     redirect: null
   };
 
@@ -36,9 +35,7 @@ class CommentItem extends Component {
     const { votes, comment, redirect } = this.state;
     return !redirect ? (
       <Comment key={comment.comment_id}>
-        <Comment.Avatar
-          src={`https://api.adorable.io/avatars/${this.state.imageNum}`}
-        />
+        {/* <Comment.Avatar src={user.avatar_url} /> */}
         <Comment.Content>
           <Comment.Author as="a">{comment.author}</Comment.Author>
           <Comment.Metadata>
