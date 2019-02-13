@@ -7,7 +7,7 @@ import Topics from './components/Topics';
 import Articles from './components/Articles';
 import Article from './components/Article';
 import About from './components/About';
-import { Container, Segment } from 'semantic-ui-react';
+import { Container, Grid } from 'semantic-ui-react';
 import PageNotFound from './components/PageNotFound';
 
 class App extends Component {
@@ -30,8 +30,8 @@ class App extends Component {
   renderMenu = () => {
     if (this.state.user) {
       return (
-        <Segment>
-          <Router className="main-content">
+        <Grid className="main-content">
+          <Router>
             <PageNotFound default />
             <About path="/about" />
             <Users path="/users" user={this.state.user} />
@@ -45,18 +45,18 @@ class App extends Component {
               user={this.state.user}
             />
           </Router>
-        </Segment>
+        </Grid>
       );
     } else {
       return (
-        <Segment>
+        <Grid className="main-content">
           <Router className="main-content">
             <PageNotFound default />
             <About path="/about" />
             <Articles path="/" />
             <Article path="/articles/:id" />
           </Router>
-        </Segment>
+        </Grid>
       );
     }
   };

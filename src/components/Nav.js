@@ -23,13 +23,13 @@ class Nav extends Component {
     const { user } = this.props;
     return (
       <Grid className="nav-bar">
-        <Grid.Row>
+        <Grid.Row centered>
           <Header textAlign="center" as="h1" inverted>
             NORTHCODERS NEWS
           </Header>
         </Grid.Row>
         <Grid.Row only="computer">
-          <Menu>
+          <Menu className="nav-bar-menu">
             <Link className="nav-link" to="/">
               <Menu.Item name="home" />
             </Link>
@@ -70,49 +70,57 @@ class Nav extends Component {
             </Menu.Menu>
           </Menu>
         </Grid.Row>
-        <Grid.Row only="mobile">
+        <Grid.Row only="mobile" centered>
           <Menu vertical>
-            <Dropdown item text="Menu">
+            <Dropdown text="Messages" pointing="left" className="link item">
               <Dropdown.Menu>
-                <Link className="nav-link" to="/">
-                  <Menu.Item name="home" />
-                </Link>
-                {user && user ? (
-                  <Link className="nav-link" to="/articles">
-                    <Menu.Item name="articles" />
+                <Dropdown.Item>
+                  <Link className="nav-link" to="/">
+                    Home
                   </Link>
+                </Dropdown.Item>
+                {user && user ? (
+                  <Dropdown.Item>
+                    <Link className="nav-link" to="/articles">
+                      Articles
+                    </Link>
+                  </Dropdown.Item>
                 ) : (
                   ''
                 )}
                 {user && user ? (
-                  <Link className="nav-link" to="/users">
-                    <Menu.Item name="users" />
-                  </Link>
+                  <Dropdown.Item>
+                    <Link className="nav-link" to="/users">
+                      Users
+                    </Link>
+                  </Dropdown.Item>
                 ) : (
                   ''
                 )}
                 {user && user ? (
-                  <Link className="nav-link" to="/topics">
-                    <Menu.Item name="topics" />
-                  </Link>
+                  <Dropdown.Item>
+                    <Link className="nav-link" to="/topics">
+                      Topics
+                    </Link>
+                  </Dropdown.Item>
                 ) : (
                   ''
                 )}
-                <Link className="nav-link" to="/about">
-                  <Menu.Item name="about" />
-                </Link>
+                <Dropdown.Item>
+                  <Link className="nav-link" to="/about">
+                    About
+                  </Link>
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
+            <Dropdown
+              placeholder="Select User"
+              selection
+              defaultValue={user}
+              options={this.state.usernames}
+              onChange={this.props.selectUser}
+            />
           </Menu>
-        </Grid.Row>
-        <Grid.Row only="mobile">
-          <Dropdown
-            placeholder="Select User"
-            selection
-            defaultValue={user}
-            options={this.state.usernames}
-            onChange={this.props.selectUser}
-          />
         </Grid.Row>
       </Grid>
     );

@@ -4,11 +4,15 @@ body {
 
 .nav-bar {
   background-color: #7719aa;
-  padding: 10px;
+  padding: 2em 2em 0 2em !important;
 }
 
 .nav-bar .ui.menu {
   align-items: center;
+}
+
+.nav-bar-menu {
+  flex: 1;
 }
 
 .segment {
@@ -17,7 +21,7 @@ body {
 }
 
 .main-content {
-  margin: 0 1em 1em 1em;
+  margin: 2em !important;
 }
 
 .article-card,
