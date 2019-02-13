@@ -36,37 +36,3 @@ body {
 .topic-title {
   text-align: center;
 }
-
-/* .topic-main {
-  padding: 10px;
-  grid-row: 3;
-  display: grid;
-  grid-template-columns: 74% 2% 24%;
-  grid-template-rows: auto;
-}
-
-.topics {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  grid-auto-rows: 15em;
-  grid-gap: 0 10px;
-}
-
-.topics a {
-  display: flex;
-}
-
-.topics a .ui.card:first-child {
-  margin: 1em 0;
-}
-
-.topics a .ui.card .description {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-height: 13ch;
-}
-
-.comment {
-  margin-top: 10px;
-} 
- */
