@@ -36,7 +36,7 @@ class Topics extends Component {
     const { topics, redirect } = this.state;
     return !redirect ? (
       <Grid className="topics-grid" divided reversed="mobile vertically">
-        <Grid.Column computer={12} mobile={4}>
+        <Grid.Column computer={12} mobile={16}>
           <Grid className="topics">
             {topics.map(topic => (
               <Grid.Column computer={4} mobile={16} key={topic.slug}>
