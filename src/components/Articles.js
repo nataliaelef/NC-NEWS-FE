@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card, Image, Grid, Dropdown, Header } from 'semantic-ui-react';
+import { Card, Grid, Dropdown, Header } from 'semantic-ui-react';
 import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import ArticleAdder from './ArticleAdder';
@@ -19,7 +19,6 @@ class Articles extends Component {
     return articles.map(article => (
       <Card key={article.article_id} className="article-card">
         <Card.Content>
-          <Image floated="right" size="mini" src={article.avatar_url} />
           <Link to={`/articles/${article.article_id}`}>
             <Card.Header>
               {article.title && article.title ? article.title : 'No Title'}

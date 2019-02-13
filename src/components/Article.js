@@ -63,7 +63,6 @@ class Article extends Component {
           </Grid.Row>
           <Grid.Row>
             <Grid.Column floated="right" computer={2} mobile={8}>
-              {/* <Image floated="right" size="mini" src={user.avatar_url} /> */}
               <Header as="h4">{article.author}</Header>
             </Grid.Column>
           </Grid.Row>

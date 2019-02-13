@@ -30,7 +30,6 @@ class Nav extends Component {
           <Link className="nav-link" to="/">
             <Menu.Item name="home" />
           </Link>
-
           {user && user ? (
             <Link className="nav-link" to="/articles">
               <Menu.Item name="articles" />

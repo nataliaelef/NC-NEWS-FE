@@ -35,7 +35,6 @@ class CommentItem extends Component {
     const { votes, comment, redirect } = this.state;
     return !redirect ? (
       <Comment key={comment.comment_id}>
-        {/* <Comment.Avatar src={user.avatar_url} /> */}
         <Comment.Content>
           <Comment.Author as="a">{comment.author}</Comment.Author>
           <Comment.Metadata>
