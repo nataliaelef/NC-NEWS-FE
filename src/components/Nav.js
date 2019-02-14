@@ -73,7 +73,7 @@ class Nav extends Component {
         </Grid.Row>
         <Grid.Row only="mobile" centered>
           <Menu vertical>
-            <Dropdown text="Messages" pointing="left" className="link item">
+            <Dropdown text="Menu" pointing="left" className="link item">
               <Dropdown.Menu>
                 <Dropdown.Item>
                   <Link className="nav-link" to="/">
