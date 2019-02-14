@@ -1,22 +1,27 @@
 import React, { Component } from 'react';
-import { Card, Image, Grid } from 'semantic-ui-react';
+import { Card, Image, Grid, Dimmer, Loader } from 'semantic-ui-react';
 import * as api from '../utils/api';
 
 class Users extends Component {
   state = {
-    users: []
+    users: [],
+    loading: false
   };
 
   componentDidMount = async () => {
+    this.setState({ loading: true });
     const users = await api.getUsers();
-    this.setState({ users });
+    this.setState({ users, loading: false });
   };
 
   render() {
-    const { users } = this.state;
+    const { users, loading } = this.state;
 
     return (
       <Grid className="users-grid">
+        <Dimmer active={loading}>
+          <Loader size="mini">Loading</Loader>
+        </Dimmer>
         {users.map(user => (
           <Grid.Column computer={4} mobile={16} key={user.username}>
             <Card>

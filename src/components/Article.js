@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Grid, Header } from 'semantic-ui-react';
+import { Button, Grid, Header, Dimmer, Loader } from 'semantic-ui-react';
 import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import Comments from './Comments';
@@ -12,7 +12,8 @@ class Article extends Component {
     comments: [],
     votes: 0,
     redirect: null,
-    hasError: false
+    hasError: false,
+    loading: false
   };
 
   handleDelete = articleId => {
@@ -39,11 +40,12 @@ class Article extends Component {
 
   componentDidMount = () => {
     const { id } = this.props;
+    this.setState({ loading: true });
     api
       .getArticleById(id)
       .then(async article => {
         const comments = await api.getCommentsByArticleId(id);
-        this.setState({ article, comments });
+        this.setState({ article, comments, loading: false });
       })
       .catch(err => {
         this.setState({ hasError: true });
@@ -51,13 +53,23 @@ class Article extends Component {
   };
 
   render() {
-    const { article, votes, comments, redirect, hasError } = this.state;
+    const {
+      article,
+      votes,
+      comments,
+      redirect,
+      hasError,
+      loading
+    } = this.state;
     const { id: articleId, user } = this.props;
     if (hasError) {
       return <PageNotFound />;
     } else {
       return !redirect ? (
         <Grid className="ui container">
+          <Dimmer active={loading}>
+            <Loader size="massive">Loading</Loader>
+          </Dimmer>
           <Grid.Row>
             <h1 className="ui header">{article.title}</h1>
           </Grid.Row>

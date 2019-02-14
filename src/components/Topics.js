@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
 import { Redirect } from '@reach/router';
-import { Card, Grid, Button } from 'semantic-ui-react';
+import { Card, Grid, Button, Loader, Dimmer } from 'semantic-ui-react';
 import * as api from '../utils/api';
 import TopicAdder from './TopicAdder';
 
 class Topics extends Component {
   state = {
     topics: [],
-    redirect: null
+    redirect: null,
+    loading: false
   };
 
   handleDelete = slug => {
@@ -28,14 +29,18 @@ class Topics extends Component {
   };
 
   getTopics = async () => {
+    this.setState({ loading: true });
     const topics = await api.getTopics();
-    this.setState({ topics });
+    this.setState({ topics, loading: false });
   };
 
   render() {
-    const { topics, redirect } = this.state;
+    const { topics, redirect, loading } = this.state;
     return !redirect ? (
       <Grid className="topics-grid" divided reversed="mobile vertically">
+        <Dimmer active={loading}>
+          <Loader size="massive">Loading</Loader>
+        </Dimmer>
         <Grid.Column computer={12} mobile={16}>
           <Grid className="topics">
             {topics.map(topic => (

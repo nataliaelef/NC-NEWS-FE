@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from '@reach/router';
-import { Card, Grid, Dropdown, Header } from 'semantic-ui-react';
+import {
+  Card,
+  Grid,
+  Dropdown,
+  Header,
+  Dimmer,
+  Loader
+} from 'semantic-ui-react';
 import { Redirect } from '@reach/router';
 import * as api from '../utils/api';
 import ArticleAdder from './ArticleAdder';
@@ -11,7 +18,8 @@ class Articles extends Component {
   state = {
     articles: [],
     topics: '',
-    redirect: null
+    redirect: null,
+    loading: false
   };
 
   renderArticles = () => {
@@ -56,12 +64,13 @@ class Articles extends Component {
 
   updateArticles = async () => {
     let articles = [];
+    this.setState({ loading: true });
     if (this.props.topic) {
       articles = await api.getArticlesByTopic(this.props.topic);
     } else {
       articles = await api.getArticles();
     }
-    this.setState({ articles });
+    this.setState({ articles, loading: false });
   };
 
   componentDidMount = async () => {
@@ -76,9 +85,12 @@ class Articles extends Component {
 
   render() {
     const articlesColumnWidth = this.props.topic ? 12 : 16;
-    const { redirect, articles } = this.state;
+    const { redirect, articles, loading } = this.state;
     return !redirect ? (
       <Grid reversed="mobile vertically" divided>
+        <Dimmer active={loading}>
+          <Loader size="massive">Loading</Loader>
+        </Dimmer>
         <Grid.Column computer={articlesColumnWidth} mobile={16}>
           {this.props.topic && this.props.topic ? (
             <Grid.Row>
