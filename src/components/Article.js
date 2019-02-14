@@ -31,7 +31,8 @@ class Article extends Component {
   };
 
   handleVoteClick = addedVote => {
-    api.voteOnArticle(addedVote, this.props.id).then(() => {
+    const { id } = this.props;
+    api.voteOnArticle(addedVote, id).then(() => {
       this.setState({
         votes: this.state.votes + addedVote
       });

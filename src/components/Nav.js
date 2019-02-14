@@ -20,7 +20,8 @@ class Nav extends Component {
   };
 
   render() {
-    const { user } = this.props;
+    const { user, selectUser } = this.props;
+    const { usernames } = this.state;
     return (
       <Grid className="nav-bar">
         <Grid.Row centered>
@@ -63,7 +64,7 @@ class Nav extends Component {
                   placeholder="Select User"
                   selection
                   defaultValue={user}
-                  options={this.state.usernames}
+                  options={usernames}
                   onChange={this.props.selectUser}
                 />
               </Menu.Item>
@@ -117,8 +118,8 @@ class Nav extends Component {
               placeholder="Select User"
               selection
               defaultValue={user}
-              options={this.state.usernames}
-              onChange={this.props.selectUser}
+              options={usernames}
+              onChange={selectUser}
             />
           </Menu>
         </Grid.Row>

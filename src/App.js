@@ -28,21 +28,22 @@ class App extends Component {
   };
 
   renderMenu = () => {
-    if (this.state.user) {
+    const { user, topic } = this.state;
+    if (user) {
       return (
         <Grid className="main-content">
           <Router>
             <PageNotFound default />
             <About path="/about" />
-            <Users path="/users" user={this.state.user} />
-            <Topics path="/topics" user={this.state.user} />
-            <Articles path="/" user={this.state.user} />
-            <Articles path="/articles" user={this.state.user} />
-            <Article path="/articles/:id" user={this.state.user} />
+            <Users path="/users" user={user} />
+            <Topics path="/topics" user={user} />
+            <Articles path="/" user={user} />
+            <Articles path="/articles" user={user} />
+            <Article path="/articles/:id" user={user} />
             <Articles
               path="/topics/:topic/articles"
-              topic={this.state.topic}
-              user={this.state.user}
+              topic={topic}
+              user={user}
             />
           </Router>
         </Grid>
@@ -62,11 +63,12 @@ class App extends Component {
   };
 
   render() {
+    const { user } = this.state;
     return (
       <Container className="App" fluid>
         <Nav
           selectUser={this.onSelectUser}
-          user={this.state.user}
+          user={user}
           selectTopic={this.onSelectTopic}
         />
         {this.renderMenu()}

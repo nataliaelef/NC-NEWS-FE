@@ -36,6 +36,7 @@ class Topics extends Component {
 
   render() {
     const { topics, redirect, loading } = this.state;
+    const { user } = this.props;
     return !redirect ? (
       <Grid className="topics-grid" divided reversed="mobile vertically">
         <Dimmer active={loading}>
@@ -68,7 +69,7 @@ class Topics extends Component {
           </Grid>
         </Grid.Column>
         <Grid.Column computer={4} mobile={16}>
-          <TopicAdder postedTopic={this.postedTopic} user={this.props.user} />
+          <TopicAdder postedTopic={this.postedTopic} user={user} />
         </Grid.Column>
       </Grid>
     ) : (

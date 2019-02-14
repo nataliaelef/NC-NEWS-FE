@@ -65,8 +65,9 @@ class Articles extends Component {
   updateArticles = async () => {
     let articles = [];
     this.setState({ loading: true });
-    if (this.props.topic) {
-      articles = await api.getArticlesByTopic(this.props.topic);
+    const { topic } = this.props;
+    if (topic) {
+      articles = await api.getArticlesByTopic(topic);
     } else {
       articles = await api.getArticles();
     }
@@ -78,25 +79,28 @@ class Articles extends Component {
   };
 
   componentDidUpdate = async prevProps => {
-    if (prevProps.path !== this.props.path) {
+    const { path } = this.props;
+    if (prevProps.path !== path) {
       await this.updateArticles();
     }
   };
 
   render() {
-    const articlesColumnWidth = this.props.topic ? 12 : 16;
     const { redirect, articles, loading } = this.state;
+    const { topic, user } = this.props;
+    const articlesColumnWidth = topic ? 12 : 16;
+
     return !redirect ? (
       <Grid reversed="mobile vertically" divided>
         <Dimmer active={loading}>
           <Loader size="massive">Loading</Loader>
         </Dimmer>
         <Grid.Column computer={articlesColumnWidth} mobile={16}>
-          {this.props.topic && this.props.topic ? (
+          {topic && topic ? (
             <Grid.Row>
               <Grid.Row>
                 <Grid.Column computer={16} mobile={16} className="topic-title">
-                  <Header>{this.props.topic.toUpperCase()}</Header>
+                  <Header>{topic.toUpperCase()}</Header>
                 </Grid.Column>
               </Grid.Row>
               <Grid.Row>
@@ -128,11 +132,11 @@ class Articles extends Component {
             </Grid>
           </Grid.Row>
         </Grid.Column>
-        {this.props.topic && this.props.topic ? (
+        {topic && topic ? (
           <Grid.Column computer={4} mobile={16}>
             <ArticleAdder
-              slug={this.props.topic}
-              user={this.props.user}
+              slug={topic}
+              user={user}
               postedArticle={this.postedArticle}
             />
           </Grid.Column>
