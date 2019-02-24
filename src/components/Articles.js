@@ -19,7 +19,8 @@ class Articles extends Component {
     articles: [],
     topics: '',
     redirect: null,
-    loading: false
+    loading: false,
+    sortOption: null
   };
 
   renderArticles = () => {
@@ -39,6 +40,7 @@ class Articles extends Component {
           <Card.Meta>
             <Moment format="YYYY/MM/DD">{article.created_at}</Moment>
           </Card.Meta>
+          <Card.Meta>votes:{article.votes}</Card.Meta>
           <Card.Description>{article.body}</Card.Description>
         </Card.Content>
       </Card>
@@ -51,15 +53,23 @@ class Articles extends Component {
     });
   };
 
+  onSortChange = (e, { name, value }) => {
+    this.setState({ [name]: value });
+    this.selectSortOption(value).then();
+  };
+
   selectSortOption = async selectedSortOption => {
     if (!selectedSortOption) return;
-    const articles = await api.getArticles(selectedSortOption);
-    this.setState(articles);
+    const { topic } = this.props;
+
+    const articles = await api.getArticlesByTopic(topic, selectedSortOption);
+    this.setState({ articles });
   };
 
   sortOptions = [
     { text: 'Date created', value: 'created_at' },
-    { text: 'Votes', value: 'votes' }
+    { text: 'Votes', value: 'votes' },
+    { text: 'Comments', value: 'total_count' }
   ];
 
   updateArticles = async () => {
@@ -91,7 +101,7 @@ class Articles extends Component {
     const articlesColumnWidth = topic ? 12 : 16;
 
     return !redirect ? (
-      <Grid reversed="mobile vertically" divided>
+      <Grid reversed="mobile vertically">
         <Dimmer active={loading}>
           <Loader size="massive">Loading</Loader>
         </Dimmer>
@@ -107,9 +117,10 @@ class Articles extends Component {
                 {articles.length ? (
                   <Dropdown
                     placeholder="Sort by"
+                    name="sortOption"
                     selection
                     options={this.sortOptions}
-                    onChange={() => {}}
+                    onChange={this.onSortChange}
                     className="sortBy-dropdown"
                   />
                 ) : (

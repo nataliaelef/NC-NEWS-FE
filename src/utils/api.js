@@ -1,6 +1,8 @@
 import axios from 'axios';
 const BASE_URL = `https://nc-news-api-ne.herokuapp.com/api`;
 
+// const BASE_URL = `http://localhost:9090/api`;
+
 // Users
 export const getUsers = async () =>
   (await axios.get(`${BASE_URL}/users`)).data.users;
@@ -38,9 +40,13 @@ export const getTopics = async () =>
 export const addTopic = async (slug, description) =>
   (await axios.post(`${BASE_URL}/topics`, { slug, description })).data.topic;
 
-export const getArticlesByTopic = async topic =>
-  (await axios.get(`${BASE_URL}/topics/${topic}/articles?limit=50`)).data
-    .articles;
+export const getArticlesByTopic = async (topic, sortBy) => {
+  let url = `${BASE_URL}/topics/${topic}/articles?limit=50`;
+  if (sortBy) {
+    url += `&sort_by=${sortBy}`;
+  }
+  return (await axios.get(url)).data.articles;
+};
 
 export const deleteTopicBySlug = slug => {
   return axios({
