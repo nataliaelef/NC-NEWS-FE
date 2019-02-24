@@ -124,18 +124,24 @@ class Article extends Component {
               ''
             )}
           </Grid.Row>
-          <Grid.Row>
-            <Grid.Column>
-              <CommentAdder
-                articleId={articleId}
-                postedComment={this.postedComment}
-                user={user}
-              />
-            </Grid.Column>
-          </Grid.Row>
-          <Grid.Row>
-            <Comments comments={comments} user={user} />
-          </Grid.Row>
+          {user ? (
+            <div>
+              <Grid.Row>
+                <Grid.Column>
+                  <CommentAdder
+                    articleId={articleId}
+                    postedComment={this.postedComment}
+                    user={user}
+                  />
+                </Grid.Column>
+              </Grid.Row>
+              <Grid.Row>
+                <Comments comments={comments} user={user} />
+              </Grid.Row>
+            </div>
+          ) : (
+            ''
+          )}
         </Grid>
       ) : (
         <Redirect noThrow to={redirect} />

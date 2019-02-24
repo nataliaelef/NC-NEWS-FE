@@ -22,6 +22,8 @@ body {
 
 .main-content {
   margin: 2em !important;
+  /* align-content: center;
+  text-align: center; */
 }
 
 .article-card,

@@ -38,7 +38,7 @@ class Topics extends Component {
     const { topics, redirect, loading } = this.state;
     const { user } = this.props;
     return !redirect ? (
-      <Grid className="topics-grid" divided reversed="mobile vertically">
+      <Grid className="topics-grid" reversed="mobile vertically">
         <Dimmer active={loading}>
           <Loader size="massive">Loading</Loader>
         </Dimmer>
@@ -55,13 +55,13 @@ class Topics extends Component {
                       <Card.Header>{topic.slug}</Card.Header>
                     </Link>
                     <Card.Description>{topic.description}</Card.Description>
-                    <Button
+                    {/* <Button
                       primary
                       floated="right"
                       onClick={() => this.handleDelete(topic.slug)}
                     >
                       Delete Topic
-                    </Button>
+                    </Button> */}
                   </Card.Content>
                 </Card>
               </Grid.Column>
